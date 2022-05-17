@@ -17,8 +17,8 @@
     "dev": "nodemon",
     "build": "tsc",
     "postbuild": "cp package.json yarn.lock ./dist",
-    "lint": "eslint --ext .cjs,.js,.ts,.json .",
-    "lint-fix": "eslint --fix --ext .cjs,.js,.ts,.json .",
+    "lint": "eslint --ext .ts ./src",
+    "lint-fix": "eslint --fix --ext .ts ./src",
     "type-check": "tsc --noEmit",
     "prepublishOnly": "npm run build",
     "test": "mocha"
