@@ -1,6 +1,6 @@
 {
-  "name": "@candy-doc/cli",
-  "version": "1.4.0",
+  "name": "candy-doc",
+  "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "publishConfig": {
