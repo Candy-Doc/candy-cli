@@ -53,5 +53,5 @@ export const runCli = async (cli: Cli | (() => Array<CommandClass>), args: Array
 };
 
 export function deleteDir(path: string) {
-  return fsPromises.rmdir(path, { recursive: true });
+  return fsPromises.rm(path, { recursive: true });
 }
