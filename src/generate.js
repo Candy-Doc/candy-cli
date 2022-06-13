@@ -6,7 +6,7 @@ const checkValidJSON = (json) => {
   try {
     return require(importedFile);
   } catch (e) {
-    throw new JSONisIncorrect(`${json} is incorrect: ` + e.message);
+    throw new JSONisIncorrect(`${importedFile} is incorrect: ` + e.message);
   }
 }
 
