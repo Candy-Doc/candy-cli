@@ -5,4 +5,4 @@ class JSONisIncorrect extends Error {
   }
 }
 
-module.exports = JSONisIncorrect;
+export default JSONisIncorrect;

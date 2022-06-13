@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "dependencies": {
     "commander": "^9.3.0",
-    "got": "^11.8.3"
+    "got": "^12.1.0"
   },
   "devDependencies": {
     "jest": "^28.1.1"
+  },
+  "jest": {
+    "extensionsToTreatAsEsm": [".msj"],
+    "transform": {}
   }
 }

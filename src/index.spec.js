@@ -1,7 +1,8 @@
-jest.mock("./generate", () => jest.fn())
+import {jest} from '@jest/globals'
+jest.mock("./generate.js", () => jest.fn())
 
-const cli = require("./index")
-const generate = require("./generate")
+import cli from './index.js'
+import generate from './generate.js'
 
 describe("CLI", () => {
 

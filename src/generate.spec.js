@@ -1,10 +1,10 @@
-const generate = require("./generate");
-const JSONisIncorrect = require("./errors/JSONisIncorrect");
+import generate from "./generate";
+import JSONisIncorrect from "./errors/JSONisIncorrect";
 
 describe("Generate", () => {
   it("checks if json is valid", () => {
     // Given
-    const functionCalled = () => generate("samples/badInput.json");
+    const functionCalled = async () => await generate("samples/badInput.json");
 
     // Then
     expect(functionCalled).toThrow(JSONisIncorrect);

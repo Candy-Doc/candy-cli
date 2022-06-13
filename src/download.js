@@ -1,15 +1,14 @@
-const got = require("got");
+import got from "got";
 
-const downloadCandyBoard = () => {
-  console.log(getPackageLatestVersionUrl('@candy-doc/board'));
+export default async function downloadCandyBoard() {
+  console.log(await getPackageLatestVersionUrl('@candy-doc/board'));
 }
 
-function getPackageLatestVersionUrl(packageName) {
-  return got(`https://registry.npmjs.org/${packageName}/`, {
+export async function getPackageLatestVersionUrl(packageName) {
+  const {body} = await got(`https://registry.npmjs.org/${packageName}/`, {
     responseType: 'json',
-  }).then(response => response.body.versions[response.body['dist-tags'].latest].dist.tarball);
+  });
+  return body.versions[body['dist-tags'].latest].dist.tarball;
 }
-
-module.exports = downloadCandyBoard;
 
 downloadCandyBoard();

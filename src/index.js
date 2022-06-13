@@ -1,9 +1,9 @@
-const { program } = require('commander');
-const generate = require('./generate');
+import {program} from 'commander'
+import generate from './generate.js'
 
 program
   .command("generate")
   .argument("<json>", "candy-doc raw output path")
   .action(generate)
 
-module.exports = program
+export default program

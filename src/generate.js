@@ -1,15 +1,13 @@
-const JSONisIncorrect = require("./errors/JSONisIncorrect");
-const path = require("path");
+import JSONisIncorrect from './errors/JSONisIncorrect.js'
+import path from 'path'
 
-const checkValidJSON = (json) => {
+async function checkValidJSON(json) {
   const importedFile = path.resolve(json);
   try {
-    return require(importedFile);
+    return await import(importedFile);
   } catch (e) {
     throw new JSONisIncorrect(`${importedFile} is incorrect: ` + e.message);
   }
 }
 
-module.exports = (json) => {
-  checkValidJSON(json);
-}
+export default checkValidJSON;
