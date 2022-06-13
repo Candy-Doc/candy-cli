@@ -1,0 +1,57 @@
+[
+  {
+    "simpleName": "Library",
+    "canonicalName": "fr.ipponlille.package-info",
+    "description": "Library of books",
+    "packageName": "fr.ipponlille",
+    "coreConcepts": [],
+    "domainEvents": [],
+    "aggregates": [
+      {
+        "description": "A readable book",
+        "simpleName": "Book",
+        "canonicalName": "fr.ipponlille.model.Book",
+        "type": "AGGREGATE",
+        "interactsWith": [
+          {
+            "simpleName": "Price",
+            "canonicalName": "fr.ipponlille.model.Price"
+          },
+          {
+            "simpleName": "EAN13",
+            "canonicalName": "fr.ipponlille.model.EAN13"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "valueObjects": [
+      {
+        "description": "Code of the book, composed of 13 numbers",
+        "simpleName": "EAN13",
+        "canonicalName": "fr.ipponlille.model.EAN13",
+        "type": "VALUE_OBJECT",
+        "interactsWith": [
+          {
+            "simpleName": "Book",
+            "canonicalName": "fr.ipponlille.model.Book"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "description": "Price of a book, in € and $",
+        "simpleName": "Price",
+        "canonicalName": "fr.ipponlille.model.Price",
+        "type": "VALUE_OBJECT",
+        "interactsWith": [
+          {
+            "simpleName": "Book",
+            "canonicalName": "fr.ipponlille.model.Book"
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "domainCommands": []
+]

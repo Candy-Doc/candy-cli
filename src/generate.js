@@ -1,3 +1,15 @@
+const JSONisIncorrect = require("./errors/JSONisIncorrect");
+const path = require("path");
+
+const checkValidJSON = (json) => {
+  const importedFile = path.resolve(json);
+  try {
+    return require(importedFile);
+  } catch (e) {
+    throw new JSONisIncorrect(`${json} is incorrect: ` + e.message);
+  }
+}
+
 module.exports = (json) => {
-  console.log(json)
+  checkValidJSON(json);
 }
