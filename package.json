@@ -1,55 +1,73 @@
 {
-  "name": "candy-doc",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "candy-cli",
+  "version": "0.0.0",
+  "description": "This CLI is used to transfer JSON data from Candy-Doc Maven plugin to our front part Candy-Board.",
+  "author": "Candy-Team @Candy-Doc",
   "bin": {
-    "candy": "dist/index.js",
-    "candy-doc": "dist/index.js"
+    "cdy": "./bin/run"
   },
+  "homepage": "https://github.com/Candy-Doc/candy-cli",
+  "license": "GPL3",
+  "main": "dist/index.js",
+  "repository": "Candy-Doc/candy-cli",
   "files": [
-    "dist/**/*.js"
+    "/bin",
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
   ],
-  "scripts": {
-    "dev": "nodemon",
-    "build": "tsc",
-    "postbuild": "cp package.json yarn.lock ./dist",
-    "lint": "eslint --ext .ts ./src",
-    "lint-fix": "eslint --fix --ext .ts ./src",
-    "type-check": "tsc --noEmit",
-    "prepublishOnly": "npm run build",
-    "test": "mocha"
+  "dependencies": {
+    "@oclif/core": "^1",
+    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-plugins": "^2.0.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^17.0.23",
-    "@types/tar": "^6.1.1",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "eslint": "^8.12.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.6.2",
-    "ts-node": "^10.7.0",
+    "@oclif/test": "^2",
+    "@types/chai": "^4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.9.4",
+    "chai": "^4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4",
+    "eslint-config-oclif-typescript": "^1.0.2",
+    "globby": "^11",
+    "mocha": "^9",
+    "oclif": "^3",
+    "shx": "^0.3.3",
+    "ts-node": "^10.2.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.4"
+    "typescript": "^4.4.3"
   },
-  "dependencies": {
-    "@candy-doc/board": "latest",
-    "clipanion": "^3.2.0-rc.11",
-    "fs-extra": "^10.1.0",
-    "got": "^11.8.3",
-    "mocha": "^10.0.0",
-    "tar": "^6.1.11",
-    "typanion": "^3.8.0"
+  "oclif": {
+    "bin": "cdy",
+    "dirname": "cdy",
+    "commands": "./dist/commands",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "hello": {
+        "description": "Say hello to the world and others"
+      }
+    }
   },
-  "volta": {
-    "node": "16.15.0",
-    "yarn": "1.22.18"
-  }
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "yarn lint",
+    "prepack": "yarn build && oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "bugs": "https://github.com/Candy-Doc/candy-cli/issues",
+  "keywords": [
+    "oclif"
+  ],
+  "types": "dist/index.d.ts"
 }
