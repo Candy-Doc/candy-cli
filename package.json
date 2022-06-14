@@ -8,7 +8,7 @@
     "candy-doc": "./bin/run"
   },
   "homepage": "https://github.com/Candy-Doc/candy-cli",
-  "license": "GPL3",
+  "license": "GPL-3.0",
   "main": "dist/index.js",
   "repository": "Candy-Doc/candy-cli",
   "files": [
@@ -20,13 +20,16 @@
   "dependencies": {
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.0.1"
+    "@oclif/plugin-plugins": "^2.0.1",
+    "got": "11.8.3",
+    "tar": "^6.1.11"
   },
   "devDependencies": {
     "@oclif/test": "^2",
     "@types/chai": "^4",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.9.4",
+    "@types/tar": "^6.1.1",
     "chai": "^4",
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4",
@@ -37,7 +40,7 @@
     "shx": "^0.3.3",
     "ts-node": "^10.2.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.3"
+    "typescript": "4.4.4"
   },
   "oclif": {
     "bin": "cdy",

@@ -1,4 +1,5 @@
 import {Command, Flags} from '@oclif/core'
+import pipeline from '../../generate-tools/pipeline'
 
 export default class Generate extends Command {
   static description = 'It generates Svelte artifact with JSON schema in it';
@@ -41,6 +42,7 @@ export default class Generate extends Command {
     this.log(
       `hello ${outputDirectory}[${candyBoardVersion}] from C:\\dev\\repositories\\candy-cli\\src\\commands\\generate.ts`,
     )
+    await pipeline()
     if (args.directory && flags['output-dir']) {
       this.log(`you input --output-dir: ${args.directory}`)
     }
