@@ -1,8 +1,11 @@
 {
-  "name": "candy-cli",
-  "version": "0.0.0",
+  "name": "candy-doc",
+  "version": "1.0.1",
   "description": "This CLI is used to transfer JSON data from Candy-Doc Maven plugin to our front part Candy-Board.",
   "author": "Candy-Team @Candy-Doc",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "cdy": "./bin/run",
     "candy-doc": "./bin/run"
@@ -21,12 +24,14 @@
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
+    "fs-extra": "^10.1.0",
     "got": "11.8.3",
     "tar": "^6.1.11"
   },
   "devDependencies": {
     "@oclif/test": "^2",
     "@types/chai": "^4",
+    "@types/fs-extra": "^9.0.13",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.9.4",
     "@types/tar": "^6.1.1",
