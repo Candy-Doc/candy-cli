@@ -1,7 +1,7 @@
 import got from "got";
 
 export default async function downloadCandyBoard() {
-  console.log(await getPackageLatestVersionUrl('@candy-doc/board'));
+  await getPackageLatestVersionUrl('@candy-doc/board')
 }
 
 export async function getPackageLatestVersionUrl(packageName) {
