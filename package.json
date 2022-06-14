@@ -4,7 +4,8 @@
   "description": "This CLI is used to transfer JSON data from Candy-Doc Maven plugin to our front part Candy-Board.",
   "author": "Candy-Team @Candy-Doc",
   "bin": {
-    "cdy": "./bin/run"
+    "cdy": "./bin/run",
+    "candy-doc": "./bin/run"
   },
   "homepage": "https://github.com/Candy-Doc/candy-cli",
   "license": "GPL3",
