@@ -21,10 +21,15 @@ export default class Generate extends Command {
 
   static args = [
     {
+      name: 'jsonPath',
+      required: true,
+      description: 'JSON file from Candy-Doc Maven plugin',
+    },
+    {
       name: 'directory',
       required: false,
-      description: 'output directory',
-      default: 'candy-build',
+      description: 'output directory where we put candy-build folder',
+      default: '.',
     },
     {
       name: 'version',
@@ -37,12 +42,12 @@ export default class Generate extends Command {
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Generate)
 
-    const outputDirectory = flags['output-dir'] ?? 'candy-build'
+    const outputDirectory = flags['output-dir'] ?? '.'
     const candyBoardVersion = flags['board-version'] ?? 'latest'
     this.log(
-      `hello ${outputDirectory}[${candyBoardVersion}] from C:\\dev\\repositories\\candy-cli\\src\\commands\\generate.ts`,
+      `Read ${args.jsonPath} - Write in ${outputDirectory}[${candyBoardVersion}] from C:\\dev\\repositories\\candy-cli\\src\\commands\\generate.ts`,
     )
-    await pipeline()
+    await pipeline(args.jsonPath, outputDirectory)
     if (args.directory && flags['output-dir']) {
       this.log(`you input --output-dir: ${args.directory}`)
     }
