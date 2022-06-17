@@ -1,5 +1,7 @@
 import {Command, Flags} from '@oclif/core'
 import pipeline from '../../generate-tools/pipeline'
+import JSONNotFound from '../../errors/json-not-found'
+import fs from 'node:fs'
 
 export default class Generate extends Command {
   static description = 'It generates Svelte artifact with JSON schema in it';
@@ -22,8 +24,9 @@ export default class Generate extends Command {
   static args = [
     {
       name: 'jsonPath',
-      required: true,
+      required: false,
       description: 'JSON file from Candy-Doc Maven plugin',
+      default: 'target/candy-doc/candy-data.json',
     },
     {
       name: 'directory',
@@ -42,14 +45,22 @@ export default class Generate extends Command {
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Generate)
 
+    if (!fs.existsSync(args.jsonPath)) {
+      throw new JSONNotFound(`${args.jsonPath} doesn't exists. Please enter valid JSON file path.`)
+    }
+
     const outputDirectory = flags['output-dir'] ?? '.'
     const candyBoardVersion = flags['board-version'] ?? 'latest'
-    this.log(
-      `Read ${args.jsonPath} - Write in ${outputDirectory}[${candyBoardVersion}] from C:\\dev\\repositories\\candy-cli\\src\\commands\\generate.ts`,
-    )
-    await pipeline(args.jsonPath, outputDirectory)
+    this.log(`Candy-CLI is reading ${args.jsonPath}...`)
+    this.log(`Output will be put in ${outputDirectory} directory with candy-board [${candyBoardVersion}]`)
     if (args.directory && flags['output-dir']) {
-      this.log(`you input --output-dir: ${args.directory}`)
+      this.log(`You specified output directory: ${args.directory}`)
     }
+
+    if (args.version && flags['board-version']) {
+      this.log(`You specified Candy-Board version: ${args.version}`)
+    }
+
+    await pipeline(args.jsonPath, outputDirectory)
   }
 }
