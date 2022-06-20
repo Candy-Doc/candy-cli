@@ -38,20 +38,14 @@ class Build extends Command {
     this.extractDir = this.extractDir ? this.extractDir : './';
     this.buildName = this.buildName ? this.buildName : 'candy-build';
     const finalDir = path.join(this.extractDir, this.buildName);
-    try {
-      await copy(this.JSONpath, `${finalDir}/candy-data.json`);
-      const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
-      const downloadStream = createDownloadStream(packageLatestVersionUrl);
-      const unTarStream = createUnTarStream(finalDir);
-      await pipeline(downloadStream, unTarStream);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
+    await copy(this.JSONpath, `${finalDir}/candy-data.json`);
+    const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
+    const downloadStream = createDownloadStream(packageLatestVersionUrl);
+    const unTarStream = createUnTarStream(finalDir);
+    await pipeline(downloadStream, unTarStream);
   }
 }
+
+export default Build;
 
 cli.register(Build);
