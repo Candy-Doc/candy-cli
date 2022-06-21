@@ -1,6 +1,6 @@
 {
   "name": "candy-doc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This CLI is used to transfer JSON data from Candy-Doc Maven plugin to our front part Candy-Board.",
   "author": "Candy-Team @Candy-Doc",
   "publishConfig": {
