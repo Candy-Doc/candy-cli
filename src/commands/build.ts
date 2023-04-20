@@ -25,13 +25,13 @@ class Build extends Command {
   extractDir = Option.String('-e,--extract-dir', {
     validator: t.isString(),
     arity: 1,
-    description: 'Where the builded project should be placed',
+    description: 'Where the built project should be placed',
   });
 
   buildName = Option.String('-b,--build-name', {
     validator: t.isString(),
     arity: 1,
-    description: 'Name of the folder containing the builded project',
+    description: 'Name of the folder containing the built project',
   });
 
   async execute() {

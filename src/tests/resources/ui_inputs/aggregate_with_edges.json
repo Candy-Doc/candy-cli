@@ -1,0 +1,49 @@
+{
+  "elements": [
+    {
+      "data": {
+        "id": "Bounded context one",
+        "label": "Bounded context one"
+      },
+      "classes": "boundedContext"
+    },
+    {
+      "data": {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+        "label": "AggregateOne",
+        "parent": "Bounded context one"
+      },
+      "classes": "aggregate"
+    },
+    {
+      "data": {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
+        "label": "DomainCommandOne",
+        "parent": "Bounded context one"
+      },
+      "classes": "domainCommand"
+    },
+    {
+      "data": {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+        "label": "DomainEventOne",
+        "parent": "Bounded context one"
+      },
+      "classes": "domainEvent"
+    },
+    {
+      "data": {
+        "id": 1,
+        "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+        "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+      }
+    },
+    {
+      "data": {
+        "id": 2,
+        "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+        "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne"
+      }
+    }
+  ]
+}
