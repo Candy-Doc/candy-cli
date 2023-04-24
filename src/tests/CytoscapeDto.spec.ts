@@ -1,9 +1,10 @@
 import path from 'path';
 import fs from 'fs';
 import assert from 'assert';
-import type {CytoscapeNode} from '../model/CytoscapeNode';
-import {CytoscapeDto} from '../model/DTO/CytoscapeDto';
-import {CytoscapeEdge} from "../model/CytoscapeEdge";
+import type { CytoscapeNode } from '../model/CytoscapeNode';
+import { CytoscapeDto } from '../model/DTO/CytoscapeDto';
+import { CytoscapeEdge } from '../model/CytoscapeEdge';
+import { CytoscapePattern } from '../tools/adapter/CytoscapePattern';
 
 const INPUTS_DIR = 'src/tests/resources/ui_inputs';
 
@@ -20,7 +21,7 @@ const boundedContext: CytoscapeNode = {
     id: 'Bounded context one',
     label: 'Bounded context one',
   },
-  classes: 'boundedContext',
+  classes: CytoscapePattern.BOUNDED_CONTEXT,
 };
 const aggregate: CytoscapeNode = {
   data: {
@@ -28,7 +29,7 @@ const aggregate: CytoscapeNode = {
     label: 'AggregateOne',
     parent: 'Bounded context one',
   },
-  classes: 'aggregate',
+  classes: CytoscapePattern.AGGREGATE,
 };
 const domainCommand: CytoscapeNode = {
   data: {
@@ -36,7 +37,7 @@ const domainCommand: CytoscapeNode = {
     label: 'DomainCommandOne',
     parent: 'Bounded context one',
   },
-  classes: 'domainCommand',
+  classes: CytoscapePattern.DOMAIN_COMMAND,
 };
 const domainEvent: CytoscapeNode = {
   data: {
@@ -44,20 +45,20 @@ const domainEvent: CytoscapeNode = {
     label: 'DomainEventOne',
     parent: 'Bounded context one',
   },
-  classes: 'domainEvent',
+  classes: CytoscapePattern.DOMAIN_EVENT,
 };
 const edgeFromEventToAggregate: CytoscapeEdge = {
   data: {
     id: 1,
-    source: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne',
-    target: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
+    source: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
+    target: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne',
   },
 };
 const edgeFromAggregateToCommand: CytoscapeEdge = {
   data: {
     id: 2,
-    source: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
-    target: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne',
+    source: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne',
+    target: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
   },
 };
 

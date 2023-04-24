@@ -1,0 +1,38 @@
+{
+  "type": "BOUNDED_CONTEXT",
+  "name": "Bounded context one",
+  "description": "Describe the bounded context here",
+  "domainModels": {
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne": {
+      "type": "AGGREGATE",
+      "simpleName": "AggregateOne",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+          "allowed": true
+        }
+      ],
+      "warnings": []
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne": {
+      "type": "DOMAIN_COMMAND",
+      "simpleName": "DomainCommandOne",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+          "allowed": true
+        }
+      ],
+      "warnings": []
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne": {
+      "type": "DOMAIN_EVENT",
+      "simpleName": "DomainEventOne",
+      "description": "",
+      "dependencies": [],
+      "warnings": []
+    }
+  }
+}

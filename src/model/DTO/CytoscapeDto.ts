@@ -1,8 +1,8 @@
 import type { CytoscapeNode } from '../CytoscapeNode';
-import {CytoscapeEdge} from "../CytoscapeEdge";
+import type { CytoscapeEdge } from '../CytoscapeEdge';
 
 export class CytoscapeDto {
-  private elements: Array<CytoscapeNode>;
+  private elements: Array<CytoscapeNode | CytoscapeEdge>;
 
   constructor(elt: (CytoscapeNode | CytoscapeEdge)[]) {
     this.elements = elt;

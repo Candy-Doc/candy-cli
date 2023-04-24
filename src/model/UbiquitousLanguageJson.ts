@@ -1,7 +1,8 @@
 import type { DomainModelJson } from './DomainModelJson';
+import { UbiquitousLanguagePattern } from '../tools/adapter/UbiquitousLanguagePattern';
 
 export type UbiquitousLanguageJson = {
-  type: string;
+  type: UbiquitousLanguagePattern;
   name: string;
   description: string;
   domainModels: Map<string, DomainModelJson>;

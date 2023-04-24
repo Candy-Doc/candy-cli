@@ -1,8 +1,9 @@
 import { UbiquitousLanguageJson } from '../UbiquitousLanguageJson';
 import { DomainModelDto } from './DomainModelDto';
+import { UbiquitousLanguagePattern } from '../../tools/adapter/UbiquitousLanguagePattern';
 
 export class UbiquitousLanguageDto {
-  private readonly _type: string;
+  private readonly _type: UbiquitousLanguagePattern;
   private readonly _name: string;
   private readonly _description: string;
   private readonly _domainModels: Map<string, DomainModelDto>;
@@ -16,7 +17,7 @@ export class UbiquitousLanguageDto {
     }
   }
 
-  get type(): string {
+  get type(): UbiquitousLanguagePattern {
     return this._type;
   }
 

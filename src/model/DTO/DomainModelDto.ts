@@ -1,12 +1,14 @@
 import { DomainModelJson } from '../DomainModelJson';
 import { DependencyDto } from './DependencyDto';
+import {UbiquitousLanguagePattern} from "../../tools/adapter/UbiquitousLanguagePattern";
 
 export class DomainModelDto {
-  private readonly _type: string;
+  private readonly _type: UbiquitousLanguagePattern;
   private readonly _simpleName: string;
   private readonly _description: string;
   private readonly _dependencies: Array<DependencyDto>;
   private readonly _warnings: Array<string>;
+  /*private _parent: Array<string>;*/
 
   constructor(domainModel: DomainModelJson) {
     this._type = domainModel.type;
@@ -22,7 +24,7 @@ export class DomainModelDto {
     }
   }
 
-  get type(): string {
+  get type(): UbiquitousLanguagePattern {
     return this._type;
   }
 
@@ -41,4 +43,4 @@ export class DomainModelDto {
   get warnings(): Array<string> {
     return this._warnings;
   }
-};
+}
