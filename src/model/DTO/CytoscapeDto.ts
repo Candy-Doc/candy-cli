@@ -9,6 +9,6 @@ export class CytoscapeDto {
   }
 
   public json(): string {
-    return JSON.stringify(this);
+    return JSON.stringify(this.elements);
   }
 }

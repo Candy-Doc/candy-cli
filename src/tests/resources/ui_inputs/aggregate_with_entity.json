@@ -1,27 +1,25 @@
-{
-  "elements": [
-    {
-      "data": {
-        "id": "Bounded context one",
-        "label": "Bounded context one"
-      },
-      "classes": "boundedContext"
+[
+  {
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
     },
-    {
-      "data": {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
-        "label": "AggregateOne",
-        "parent": "Bounded context one"
-      },
-      "classes": "aggregate"
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "Bounded context one"
     },
-    {
-      "data": {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
-        "label": "EntityOne",
-        "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
-      },
-      "classes": "entity"
-    }
-  ]
-}
+    "classes": "aggregate"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+      "label": "EntityOne",
+      "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    },
+    "classes": "entity"
+  }
+]

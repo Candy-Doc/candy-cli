@@ -14,6 +14,7 @@ const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
 const UBIQUITOUS_LANGUAGE_WITH_WARNING = 'ubiquitous_language_with_warning.json';
 const UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES =
   'ubiquitous_language_with_not_allowed_dependencies.json';
+const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
 const getExpectedJsonFrom = (fileName: string) => {
   const filePath = path.join(INPUTS_DIR, fileName);
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
@@ -77,5 +78,12 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     );
 
     assert.deepStrictEqual(modifiedJson, expectedJson);
+  });
+  it('creates edges for an entity/value object shared by 2 parents', () => {
+    const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
+
+    console.assert('Not implemented yet');
+    // assert.deepStrictEqual(modifiedJson, expectedJson);
   });
 });

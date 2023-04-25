@@ -1,72 +1,70 @@
-{
-  "elements": [
-    {
-      "data": {
-        "id": "Bounded context one",
-        "label": "Bounded context one"
-      },
-      "classes": "boundedContext"
+[
+  {
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
     },
-    {
-      "data": {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
-        "label": "FactoryOne",
-        "parent": "Bounded context one",
-        "errors": [
-          "!DEP"
-        ]
-      },
-      "classes": "factory"
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
+      "label": "FactoryOne",
+      "parent": "Bounded context one",
+      "errors": [
+        "!DEP"
+      ]
     },
-    {
-      "data": {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
-        "label": "DomainEventOne",
-        "parent": "Bounded context one",
-        "errors": [
-          "!DEP"
-        ]
-      },
-      "classes": "event"
+    "classes": "factory"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "label": "DomainEventOne",
+      "parent": "Bounded context one",
+      "errors": [
+        "!DEP"
+      ]
     },
-    {
-      "data": {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
-        "label": "AggregateOne",
-        "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
-        "errors": [
-          "!DEP"
-        ]
-      },
-      "classes": "aggregate"
+    "classes": "event"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+      "errors": [
+        "!DEP"
+      ]
     },
-    {
-      "data": {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
-        "label": "EntityOne",
-        "parent": "Bounded context one",
-        "errors": [
-          "!DEP"
-        ]
-      },
-      "classes": "entity"
+    "classes": "aggregate"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+      "label": "EntityOne",
+      "parent": "Bounded context one",
+      "errors": [
+        "!DEP"
+      ]
     },
-    {
-      "data": {
-        "id": 1,
-        "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
-        "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
-        "errors": [
-          "!DEP"
-        ]
-      }
-    },
-    {
-      "data": {
-        "id": 2,
-        "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
-        "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
-      }
+    "classes": "entity"
+  },
+  {
+    "data": {
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "errors": [
+        "!DEP"
+      ]
     }
-  ]
-}
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    }
+  }
+]

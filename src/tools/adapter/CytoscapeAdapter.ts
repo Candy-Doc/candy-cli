@@ -30,6 +30,9 @@ export class CytoscapeAdapter implements IAdapter {
       if (cytoscapeElement.data.errors?.length === 0) cytoscapeElement.data.errors = undefined;
     });
   }
+  private getNodeIndex(nodes: Array<CytoscapeNode>, nodeId: string): number {
+    return nodes.findIndex((cytoscapeNode) => cytoscapeNode.data.id === nodeId);
+  }
 
   private isNodeDependency = (parentNode: CytoscapeNode, dependencyNode: CytoscapeNode): boolean =>
     dependencyNode.classes === CytoscapePattern.DOMAIN_ENTITY ||
@@ -68,12 +71,8 @@ export class CytoscapeAdapter implements IAdapter {
     const edges = new Array<CytoscapeEdge>();
     this.ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
       domainModelDto.dependencies.forEach((dependencyDto) => {
-        const dependencyNodeIndex = nodes.findIndex(
-          (cytoscapeNode) => cytoscapeNode.data.id === dependencyDto.refersTo,
-        );
-        const parentNodeIndex = nodes.findIndex(
-          (cytoscapeNode) => cytoscapeNode.data.id === domainModelId,
-        );
+        const dependencyNodeIndex = this.getNodeIndex(nodes, dependencyDto.refersTo);
+        const parentNodeIndex = this.getNodeIndex(nodes, domainModelId);
         if (dependencyNodeIndex !== -1) {
           if (!dependencyDto.allowed) {
             nodes[parentNodeIndex].data.errors.push(NOT_ALLOWED_DEPENDENCIES);
