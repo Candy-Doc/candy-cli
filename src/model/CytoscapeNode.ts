@@ -1,5 +1,7 @@
 import {CytoscapePattern} from "../tools/adapter/CytoscapePattern";
 import {CytoscapeNodeDto} from "./DTO/CytoscapeNodeDto";
+import {CytoscapeEdgeDto} from "./DTO/CytoscapeEdgeDto";
+import {CytoscapeAdapter} from "../tools/adapter/CytoscapeAdapter";
 
 export class CytoscapeNode {
   get classes(): CytoscapePattern {
@@ -10,7 +12,7 @@ export class CytoscapeNode {
   }
   private readonly _id: string;
   private readonly _label: string;
-  private _parent?: string;
+  private _parents: Array<string>;
   private _warnings: Array<string>;
   private _errors: Array<string>;
   private readonly _classes: CytoscapePattern;
@@ -21,9 +23,10 @@ export class CytoscapeNode {
     this._classes = classes;
     this._errors = new Array<string>();
     this._warnings = new Array<string>();
+    this._parents = new Array<string>();
   }
-  set parent(value: string) {
-    this._parent = value;
+  public addParent(parentId: string) {
+    this._parents.push(parentId);
   }
   public addWarning(warningCode: string) {
     this._warnings.push(warningCode);
@@ -32,16 +35,25 @@ export class CytoscapeNode {
     this._errors.push(errorCode);
   }
 
-  public toDto(): CytoscapeNodeDto {
+  public toDto(adapter: CytoscapeAdapter): CytoscapeNodeDto {
     return {
       classes: this.classes,
       data: {
         id: this._id,
         label: this._label,
-        parent: this._parent,
+        parent:
+          this._parents.length > 2 ? this.adaptToEdgeDependencies(adapter) : this._parents.at(-1),
         errors: this._errors.length > 0 ? this._errors : undefined,
         warnings: this._warnings.length > 0 ? this._warnings : undefined,
       },
     };
+  }
+
+  private adaptToEdgeDependencies(adapter: CytoscapeAdapter): string {
+    const nodeDependencies = this._parents.slice(1);
+    nodeDependencies.forEach((parentId: string) => {
+      adapter.addEdge(parentId, this._id);
+    });
+    return this._parents[0];
   }
 }

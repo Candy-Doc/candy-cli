@@ -32,10 +32,16 @@
   },
   {
     "data": {
-      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
-      "label": "EntityOne",
-      "parent": "Bounded context one"
-    },
-    "classes": "entity"
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne"
+    }
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateTwo",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne"
+    }
   }
 ]

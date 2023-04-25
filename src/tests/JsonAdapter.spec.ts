@@ -83,7 +83,6 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
     const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
 
-    console.assert('Not implemented yet');
-    // assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, expectedJson);
   });
 });
