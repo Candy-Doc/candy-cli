@@ -7,7 +7,9 @@ export class DomainModelDto {
   private readonly _simpleName: string;
   private readonly _description: string;
   private readonly _dependencies: Array<DependencyDto>;
-  private readonly _warnings: Array<string>;
+  private readonly _warnings?: Array<string>;
+  private readonly _errors?: Array<string>;
+
   /*private _parent: Array<string>;*/
 
   constructor(domainModel: DomainModelJson) {
@@ -18,12 +20,8 @@ export class DomainModelDto {
     for (const dependency of domainModel.dependencies) {
       this._dependencies.push(new DependencyDto(dependency));
     }
-    this._warnings = new Array<string>();
-    for (const warning of domainModel.warnings) {
-      this._warnings.push(warning);
-    }
+    this._warnings = hasWarning(domainModel) ? fillWarnings(domainModel) : undefined;
   }
-
   get type(): UbiquitousLanguagePattern {
     return this._type;
   }
@@ -40,7 +38,18 @@ export class DomainModelDto {
     return this._dependencies;
   }
 
-  get warnings(): Array<string> {
+  get warnings(): Array<string> | undefined {
     return this._warnings;
   }
 }
+const fillWarnings = (domainModel: DomainModelJson): Array<string> => {
+  const warnings = new Array<string>();
+  for (const warning of domainModel.warnings) {
+    warnings.push(warning);
+  }
+  return warnings;
+};
+
+const hasWarning = (domainModel: DomainModelJson): boolean => {
+  return domainModel.warnings.length > 0;
+};

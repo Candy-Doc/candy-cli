@@ -35,7 +35,10 @@
       "data": {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
         "label": "EntityOne",
-        "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+        "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+        "warnings": [
+          "NO_ID"
+    ]
       },
       "classes": "entity"
     },

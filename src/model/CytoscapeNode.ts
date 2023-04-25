@@ -5,6 +5,8 @@ export type CytoscapeNode = {
     id: string;
     label: string;
     parent?: string;
+    warnings?: Array<string>;
+    errors?: Array<string>;
   };
   classes: CytoscapePattern;
 };

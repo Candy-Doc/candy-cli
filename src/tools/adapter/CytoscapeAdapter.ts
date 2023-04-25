@@ -1,11 +1,12 @@
-import { UbiquitousLanguageDto } from '../../model/DTO/UbiquitousLanguageDto';
-import { CytoscapeDto } from '../../model/DTO/CytoscapeDto';
-import { CytoscapeEdge } from '../../model/CytoscapeEdge';
-import { CytoscapeNode } from '../../model/CytoscapeNode';
-import { PatternFormatter } from './PatternFormatter';
-import { CytoscapePattern } from './CytoscapePattern';
-import { IAdapter } from './Adapter';
-import { UbiquitousLanguageJson } from '../../model/UbiquitousLanguageJson';
+import {UbiquitousLanguageDto} from '../../model/DTO/UbiquitousLanguageDto';
+import {CytoscapeDto} from '../../model/DTO/CytoscapeDto';
+import {CytoscapeEdge} from '../../model/CytoscapeEdge';
+import {CytoscapeNode} from '../../model/CytoscapeNode';
+import {PatternFormatter} from './PatternFormatter';
+import {CytoscapePattern} from './CytoscapePattern';
+import {IAdapter} from './Adapter';
+import {UbiquitousLanguageJson} from '../../model/UbiquitousLanguageJson';
+import {NOT_ALLOWED_DEPENDENCIES} from "./ErrorCodes";
 
 export class CytoscapeAdapter implements IAdapter {
   private edgeCounter = 0;
@@ -24,9 +25,16 @@ export class CytoscapeAdapter implements IAdapter {
     return this.edgeCounter;
   }
 
-  private isNodeDependency = (dependencyNode: CytoscapeNode): boolean =>
+  private cleanEmptyErrors(elements: Array<CytoscapeNode | CytoscapeEdge>) {
+    elements.forEach((cytoscapeElement: CytoscapeNode | CytoscapeEdge) => {
+      if (cytoscapeElement.data.errors?.length === 0) cytoscapeElement.data.errors = undefined;
+    });
+  }
+
+  private isNodeDependency = (parentNode: CytoscapeNode, dependencyNode: CytoscapeNode): boolean =>
     dependencyNode.classes === CytoscapePattern.DOMAIN_ENTITY ||
-    dependencyNode.classes === CytoscapePattern.VALUE_OBJECT;
+    dependencyNode.classes === CytoscapePattern.VALUE_OBJECT ||
+    parentNode.classes === CytoscapePattern.DOMAIN_ENTITY;
 
   private addBoundedContext(nodes: CytoscapeNode[]) {
     const boundedContextNode: CytoscapeNode = {
@@ -46,9 +54,12 @@ export class CytoscapeAdapter implements IAdapter {
           id: domainModelId,
           label: domainModelDto.simpleName,
           parent: this.ubiquitousLanguageDto.name,
+          warnings: domainModelDto.warnings ? domainModelDto.warnings : undefined,
+          errors: [],
         },
         classes: PatternFormatter.toCytoscapeFormat(domainModelDto.type),
       };
+
       nodes.push(domainModelNode);
     });
   }
@@ -60,8 +71,15 @@ export class CytoscapeAdapter implements IAdapter {
         const dependencyNodeIndex = nodes.findIndex(
           (cytoscapeNode) => cytoscapeNode.data.id === dependencyDto.refersTo,
         );
+        const parentNodeIndex = nodes.findIndex(
+          (cytoscapeNode) => cytoscapeNode.data.id === domainModelId,
+        );
         if (dependencyNodeIndex !== -1) {
-          if (this.isNodeDependency(nodes[dependencyNodeIndex])) {
+          if (!dependencyDto.allowed) {
+            nodes[parentNodeIndex].data.errors.push(NOT_ALLOWED_DEPENDENCIES);
+            nodes[dependencyNodeIndex].data.errors.push(NOT_ALLOWED_DEPENDENCIES);
+          }
+          if (this.isNodeDependency(nodes[parentNodeIndex], nodes[dependencyNodeIndex])) {
             nodes[dependencyNodeIndex].data.parent = domainModelId;
           } else {
             const domainModelEdge: CytoscapeEdge = {
@@ -69,6 +87,7 @@ export class CytoscapeAdapter implements IAdapter {
                 id: this.newEdgeId(),
                 source: domainModelId,
                 target: dependencyDto.refersTo,
+                errors: dependencyDto.allowed ? undefined : [NOT_ALLOWED_DEPENDENCIES],
               },
             };
             edges.push(domainModelEdge);
@@ -84,6 +103,7 @@ export class CytoscapeAdapter implements IAdapter {
     this.addBoundedContext(nodes);
     this.addDomainModelsElements(nodes);
     const elements = this.addDependencies(nodes);
+    this.cleanEmptyErrors(elements);
     return new CytoscapeDto(elements);
   }
 }

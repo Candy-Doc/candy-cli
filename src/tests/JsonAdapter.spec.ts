@@ -11,59 +11,45 @@ const AGGREGATE_WITH_EDGES = 'aggregate_with_edges.json';
 const AGGREGATE_WITH_ENTITY = 'aggregate_with_entity.json';
 const SIMPLE_BOUNDED_CONTEXT = 'simple_bounded_context.json';
 const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
-function sortJson(json: string): string {
-  const jsonObject = JSON.parse(json);
-  return JSON.stringify(jsonObject.elements.sort());
-}
-function sortParsedJson(json: any): string {
-  return JSON.stringify(json.elements.sort());
-}
+const UBIQUITOUS_LANGUAGE_WITH_WARNING = 'ubiquitous_language_with_warning.json';
+const UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES =
+  'ubiquitous_language_with_not_allowed_dependencies.json';
+const getExpectedJsonFrom = (fileName: string) => {
+  const filePath = path.join(INPUTS_DIR, fileName);
+  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+};
+
+const buildActualJsonForCytoscapeFrom = (fileName: string) => {
+  const filePath = path.join(OUTPUTS_DIR, fileName);
+  const jsonFile = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const adaptedJson = new CytoscapeAdapter(jsonFile).adapt();
+  return JSON.parse(adaptedJson);
+};
 
 describe('Json Adapter from plugin output to candy-board input', () => {
-  it('should transform concepts', function () {
-    const outputAloneAggregatePath = path.join(OUTPUTS_DIR, ALONE_AGGREGATE);
-    const inputAloneAggregatePath = path.join(INPUTS_DIR, ALONE_AGGREGATE);
+  it('should adapts concepts', function () {
+    const expectedJson = getExpectedJsonFrom(ALONE_AGGREGATE);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(ALONE_AGGREGATE);
 
-    const aloneAggregateJson = JSON.parse(fs.readFileSync(outputAloneAggregatePath, 'utf-8'));
-    const expectedJson = JSON.parse(fs.readFileSync(inputAloneAggregatePath, 'utf-8'));
-
-    const modifiedJson = new CytoscapeAdapter(aloneAggregateJson).adapt();
-
-    assert.deepStrictEqual(sortJson(modifiedJson), sortParsedJson(expectedJson));
+    assert.deepStrictEqual(modifiedJson, expectedJson);
   });
-  it('transforms concepts with edges', () => {
-    const outAggregateWithEdgesPath = path.join(OUTPUTS_DIR, AGGREGATE_WITH_EDGES);
-    const inAggregateWithEdgesPath = path.join(INPUTS_DIR, AGGREGATE_WITH_EDGES);
+  it('adapts concepts with edges', () => {
+    const expectedJson = getExpectedJsonFrom(AGGREGATE_WITH_EDGES);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(AGGREGATE_WITH_EDGES);
 
-    const aggregateWithEdgesJson = JSON.parse(fs.readFileSync(outAggregateWithEdgesPath, 'utf-8'));
-    const expectedJson = JSON.parse(fs.readFileSync(inAggregateWithEdgesPath, 'utf-8'));
-
-    const modifiedJson = new CytoscapeAdapter(aggregateWithEdgesJson).adapt();
-
-    assert.deepStrictEqual(JSON.parse(modifiedJson), expectedJson);
+    assert.deepStrictEqual(modifiedJson, expectedJson);
   });
-  it('transform clustered entity', () => {
-    const outAggregateWithEntityPath = path.join(OUTPUTS_DIR, AGGREGATE_WITH_ENTITY);
-    const inAggregateWithEntityPath = path.join(INPUTS_DIR, AGGREGATE_WITH_ENTITY);
+  it('adapts clustered entity', () => {
+    const expectedJson = getExpectedJsonFrom(AGGREGATE_WITH_ENTITY);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(AGGREGATE_WITH_ENTITY);
 
-    const aggregateWithEntityJson = JSON.parse(
-      fs.readFileSync(outAggregateWithEntityPath, 'utf-8'),
-    );
-    const expectedJson = JSON.parse(fs.readFileSync(inAggregateWithEntityPath, 'utf-8'));
-    const modifiedJson = new CytoscapeAdapter(aggregateWithEntityJson).adapt();
-
-    assert.deepStrictEqual(JSON.parse(modifiedJson), expectedJson);
+    assert.deepStrictEqual(modifiedJson, expectedJson);
   });
   it('adapts a simple bounded context', () => {
-    const outSimpleBoundedContextPath = path.join(OUTPUTS_DIR, SIMPLE_BOUNDED_CONTEXT);
-    const inSimpleBoundedContextPath = path.join(INPUTS_DIR, SIMPLE_BOUNDED_CONTEXT);
+    const expectedJson = getExpectedJsonFrom(SIMPLE_BOUNDED_CONTEXT);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(SIMPLE_BOUNDED_CONTEXT);
 
-    const simpleBoundedContextJson = JSON.parse(
-      fs.readFileSync(outSimpleBoundedContextPath, 'utf-8'),
-    );
-    const expectedJson = JSON.parse(fs.readFileSync(inSimpleBoundedContextPath, 'utf-8'));
-    const modifiedJson = new CytoscapeAdapter(simpleBoundedContextJson).adapt();
-    assert.deepStrictEqual(JSON.parse(modifiedJson), expectedJson);
+    assert.deepStrictEqual(modifiedJson, expectedJson);
   });
   it('throw an error if the pattern is not known', () => {
     const jsonWithUnknownPatternPath = path.join(OUTPUTS_DIR, JSON_WITH_UNKNOWN_PATTERN);
@@ -77,5 +63,19 @@ describe('Json Adapter from plugin output to candy-board input', () => {
         message: 'PatternFormatter : This pattern is unknown.',
       },
     );
+  });
+  it('adapts ubiquitous language with warnings', () => {
+    const expectedJson = getExpectedJsonFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
+
+    assert.deepStrictEqual(modifiedJson, expectedJson);
+  });
+  it('creates errors from not allowed dependencies', () => {
+    const expectedJson = getExpectedJsonFrom(UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(
+      UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES,
+    );
+
+    assert.deepStrictEqual(modifiedJson, expectedJson);
   });
 });
