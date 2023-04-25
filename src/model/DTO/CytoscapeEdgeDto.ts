@@ -1,4 +1,4 @@
-export type CytoscapeEdge = {
+export type CytoscapeEdgeDto = {
   data: {
     id: number;
     source: string;

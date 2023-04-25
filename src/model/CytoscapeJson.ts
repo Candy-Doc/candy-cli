@@ -1,5 +1,5 @@
-import { CytoscapeNode } from './CytoscapeNode';
+import { CytoscapeNodeDto } from './DTO/CytoscapeNodeDto';
 
 export type CytoscapeJson = {
-  nodes: Array<CytoscapeNode>;
+  nodes: Array<CytoscapeNodeDto>;
 };

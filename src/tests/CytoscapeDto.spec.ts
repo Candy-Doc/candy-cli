@@ -1,9 +1,9 @@
 import path from 'path';
 import fs from 'fs';
 import assert from 'assert';
-import type {CytoscapeNode} from '../model/CytoscapeNode';
+import type {CytoscapeNodeDto} from '../model/DTO/CytoscapeNodeDto';
 import {CytoscapeDto} from '../model/DTO/CytoscapeDto';
-import {CytoscapeEdge} from '../model/CytoscapeEdge';
+import {CytoscapeEdgeDto} from '../model/DTO/CytoscapeEdgeDto';
 import {CytoscapePattern} from '../tools/adapter/CytoscapePattern';
 
 const INPUTS_DIR = 'src/tests/resources/ui_inputs';
@@ -16,14 +16,14 @@ const AGGREGATE_WITH_EDGES = 'aggregate_with_edges.json';
 const aggregateWithEdgesPath = path.join(INPUTS_DIR, AGGREGATE_WITH_EDGES);
 const aggregateWithEdgesJson = JSON.parse(fs.readFileSync(aggregateWithEdgesPath, 'utf-8'));
 
-const boundedContext: CytoscapeNode = {
+const boundedContext: CytoscapeNodeDto = {
   data: {
     id: 'Bounded context one',
     label: 'Bounded context one',
   },
   classes: CytoscapePattern.BOUNDED_CONTEXT,
 };
-const aggregate: CytoscapeNode = {
+const aggregate: CytoscapeNodeDto = {
   data: {
     id: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
     label: 'AggregateOne',
@@ -31,7 +31,7 @@ const aggregate: CytoscapeNode = {
   },
   classes: CytoscapePattern.AGGREGATE,
 };
-const domainCommand: CytoscapeNode = {
+const domainCommand: CytoscapeNodeDto = {
   data: {
     id: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne',
     label: 'DomainCommandOne',
@@ -39,7 +39,7 @@ const domainCommand: CytoscapeNode = {
   },
   classes: CytoscapePattern.DOMAIN_COMMAND,
 };
-const domainEvent: CytoscapeNode = {
+const domainEvent: CytoscapeNodeDto = {
   data: {
     id: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne',
     label: 'DomainEventOne',
@@ -47,14 +47,14 @@ const domainEvent: CytoscapeNode = {
   },
   classes: CytoscapePattern.DOMAIN_EVENT,
 };
-const edgeFromEventToAggregate: CytoscapeEdge = {
+const edgeFromEventToAggregate: CytoscapeEdgeDto = {
   data: {
     id: 1,
     source: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
     target: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne',
   },
 };
-const edgeFromAggregateToCommand: CytoscapeEdge = {
+const edgeFromAggregateToCommand: CytoscapeEdgeDto = {
   data: {
     id: 2,
     source: 'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne',
