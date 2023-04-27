@@ -1,6 +1,6 @@
 import { DomainModelJson } from '../DomainModelJson';
 import { DependencyDto } from './DependencyDto';
-import {UbiquitousLanguagePattern} from "../../tools/adapter/UbiquitousLanguagePattern";
+import { UbiquitousLanguagePattern } from '../../tools/adapter/UbiquitousLanguagePattern';
 
 export class DomainModelDto {
   private readonly _type: UbiquitousLanguagePattern;
@@ -22,6 +22,7 @@ export class DomainModelDto {
     }
     this._warnings = hasWarning(domainModel) ? fillWarnings(domainModel) : undefined;
   }
+
   get type(): UbiquitousLanguagePattern {
     return this._type;
   }
@@ -42,6 +43,7 @@ export class DomainModelDto {
     return this._warnings;
   }
 }
+
 const fillWarnings = (domainModel: DomainModelJson): Array<string> => {
   const warnings = new Array<string>();
   for (const warning of domainModel.warnings) {

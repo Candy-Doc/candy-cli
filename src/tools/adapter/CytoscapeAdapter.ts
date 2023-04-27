@@ -1,12 +1,12 @@
-import {UbiquitousLanguageDto} from '../../model/DTO/UbiquitousLanguageDto';
-import {CytoscapeDto} from '../../model/DTO/CytoscapeDto';
-import {CytoscapeEdgeDto} from '../../model/DTO/CytoscapeEdgeDto';
-import {PatternFormatter} from './PatternFormatter';
-import {CytoscapePattern} from './CytoscapePattern';
-import {IAdapter} from './Adapter';
-import {UbiquitousLanguageJson} from '../../model/UbiquitousLanguageJson';
-import {NOT_ALLOWED_DEPENDENCIES} from "./ErrorCodes";
-import {CytoscapeNode} from "../../model/CytoscapeNode";
+import { UbiquitousLanguageDto } from '../../model/DTO/UbiquitousLanguageDto';
+import { CytoscapeDto } from '../../model/DTO/CytoscapeDto';
+import { CytoscapeEdgeDto } from '../../model/DTO/CytoscapeEdgeDto';
+import { PatternFormatter } from './PatternFormatter';
+import { CytoscapePattern } from './CytoscapePattern';
+import { IAdapter } from './Adapter';
+import { UbiquitousLanguageJson } from '../../model/UbiquitousLanguageJson';
+import { NOT_ALLOWED_DEPENDENCIES } from './ErrorCodes';
+import { CytoscapeNode } from '../../model/CytoscapeNode';
 
 export class CytoscapeAdapter implements IAdapter {
   private edgeCounter = 0;
@@ -60,7 +60,7 @@ export class CytoscapeAdapter implements IAdapter {
     const boundedContextNode: CytoscapeNode = new CytoscapeNode(
       this.ubiquitousLanguageDto.name,
       this.ubiquitousLanguageDto.name,
-      PatternFormatter.toCytoscapeFormat(this.ubiquitousLanguageDto.type)
+      PatternFormatter.toCytoscapeFormat(this.ubiquitousLanguageDto.type),
     );
     this.nodes.push(boundedContextNode);
   }

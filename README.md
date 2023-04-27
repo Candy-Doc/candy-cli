@@ -15,10 +15,12 @@
 
 This CLI is used to transfer JSON data to our front part.
 
-It is used to link [Candy Doc Maven plugin](https://github.com/Candy-Doc/candy-doc-maven-plugin) and [Candy Board](https://github.com/Candy-Doc/candy-board).
+It is used to link [Candy Doc Maven plugin](https://github.com/Candy-Doc/candy-doc-maven-plugin)
+and [Candy Board](https://github.com/Candy-Doc/candy-board).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 ## Table of Contents
 
 - [Stay tuned 👀](#stay-tuned-)

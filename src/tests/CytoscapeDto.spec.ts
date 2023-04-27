@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs';
 import assert from 'assert';
-import type {CytoscapeNodeDto} from '../model/DTO/CytoscapeNodeDto';
-import {CytoscapeDto} from '../model/DTO/CytoscapeDto';
-import {CytoscapeEdgeDto} from '../model/DTO/CytoscapeEdgeDto';
-import {CytoscapePattern} from '../tools/adapter/CytoscapePattern';
+import type { CytoscapeNodeDto } from '../model/DTO/CytoscapeNodeDto';
+import { CytoscapeDto } from '../model/DTO/CytoscapeDto';
+import { CytoscapeEdgeDto } from '../model/DTO/CytoscapeEdgeDto';
+import { CytoscapePattern } from '../tools/adapter/CytoscapePattern';
 
 const INPUTS_DIR = 'src/tests/resources/ui_inputs';
 

@@ -7,6 +7,7 @@ export class UbiquitousLanguageDto {
   private readonly _name: string;
   private readonly _description: string;
   private readonly _domainModels: Map<string, DomainModelDto>;
+
   constructor(ubiquitousLanguage: UbiquitousLanguageJson) {
     this._type = ubiquitousLanguage.type;
     this._name = ubiquitousLanguage.name;
