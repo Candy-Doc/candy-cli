@@ -34,7 +34,8 @@ jobs:
     - uses: actions/setup-python@v2
     - name: Install Dependencies
       run: |
-        npm -g i @typescript-eslint/eslint-plugin
+        npm install @typescript-eslint/eslint-plugin@latest --save-dev
+
 
     - name: Run pre-commit hooks
       uses: pre-commit/action@v2.0.3
