@@ -1,6 +1,5 @@
 import {CytoscapePattern} from "../tools/adapter/CytoscapePattern";
 import {CytoscapeNodeDto} from "./DTO/CytoscapeNodeDto";
-import {CytoscapeEdgeDto} from "./DTO/CytoscapeEdgeDto";
 import {CytoscapeAdapter} from "../tools/adapter/CytoscapeAdapter";
 
 export class CytoscapeNode {
@@ -12,9 +11,9 @@ export class CytoscapeNode {
   }
   private readonly _id: string;
   private readonly _label: string;
-  private _parents: Array<string>;
-  private _warnings: Array<string>;
-  private _errors: Array<string>;
+  private readonly _parents: Array<string>;
+  private readonly _warnings: Array<string>;
+  private readonly _errors: Array<string>;
   private readonly _classes: CytoscapePattern;
 
   constructor(id: string, label: string, classes: CytoscapePattern) {

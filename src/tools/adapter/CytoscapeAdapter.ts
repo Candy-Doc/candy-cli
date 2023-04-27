@@ -1,7 +1,6 @@
 import {UbiquitousLanguageDto} from '../../model/DTO/UbiquitousLanguageDto';
 import {CytoscapeDto} from '../../model/DTO/CytoscapeDto';
 import {CytoscapeEdgeDto} from '../../model/DTO/CytoscapeEdgeDto';
-import {CytoscapeNodeDto} from '../../model/DTO/CytoscapeNodeDto';
 import {PatternFormatter} from './PatternFormatter';
 import {CytoscapePattern} from './CytoscapePattern';
 import {IAdapter} from './Adapter';
@@ -23,6 +22,13 @@ export class CytoscapeAdapter implements IAdapter {
 
   public adapt() {
     return this.toCytoscapeDto().json();
+  }
+
+  private toCytoscapeDto(): CytoscapeDto {
+    this.addBoundedContext();
+    this.addDomainModelsElements();
+    this.addDependencies();
+    return this.createCytoscapeDto();
   }
 
   private newEdgeId(): number {
@@ -100,13 +106,6 @@ export class CytoscapeAdapter implements IAdapter {
         }
       });
     });
-  }
-
-  public toCytoscapeDto(): CytoscapeDto {
-    this.addBoundedContext();
-    this.addDomainModelsElements();
-    this.addDependencies();
-    return this.createCytoscapeDto();
   }
 
   private createCytoscapeDto(): CytoscapeDto {

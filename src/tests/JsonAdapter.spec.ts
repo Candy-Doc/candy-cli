@@ -85,4 +85,10 @@ describe('Json Adapter from plugin output to candy-board input', () => {
 
     assert.deepStrictEqual(modifiedJson, expectedJson);
   });
+  it('creates a single json from multiples json', () => {
+    const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
+    const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
+
+    assert.deepStrictEqual(modifiedJson, expectedJson);
+  });
 });

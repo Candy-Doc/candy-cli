@@ -1,6 +1,6 @@
 {
   "name": "candy-doc",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "main": "index.js",
   "license": "MIT",
   "publishConfig": {
@@ -49,7 +49,7 @@
     "typanion": "^3.8.0"
   },
   "volta": {
-    "node": "16.15.0",
-    "yarn": "1.22.18"
+    "node": "18.16.0",
+    "npm": "9.6.5"
   }
 }
