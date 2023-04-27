@@ -26,6 +26,17 @@ jobs:
         GITMOJI_PATH: ./.github/.gitmojis.json
       uses: JulienKode/pull-request-name-linter-action@v0.5.0
 
+  run_tests:
+    if: ${{ github.actor != 'dependabot[bot]'  && github.actor != 'allcontributors[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Tests
+      run: npm run test
+
   run_precommit_hooks:
     if: ${{ github.actor != 'dependabot[bot]'  && github.actor != 'allcontributors[bot]' }}
     runs-on: ubuntu-latest
