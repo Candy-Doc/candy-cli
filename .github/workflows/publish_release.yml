@@ -16,7 +16,7 @@ jobs:
         persist-credentials: false
 
     - name: Install Node.js
-      uses: setup-node/@v3
+      uses: actions/setup-node@v3
       with:
         node-version: 18.16
         cache: npm
