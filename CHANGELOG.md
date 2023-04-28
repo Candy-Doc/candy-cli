@@ -1,3 +1,8 @@
+# [v1.0.1](https://github.com/Candy-Doc/candy-cli/compare/v1.0.0...v1.0.1) (2023-04-28)
+
+        ## 🐛 Bug Fixes
+            - [`e12ab3c`](https://github.com/Candy-Doc/candy-cli/commit/e12ab3c)  fix(cd): Fix release publisher
+
 # v1.0.0 (2023-04-28)
 
         ## 🍬 Major Features
