@@ -1,3 +1,8 @@
+# [v1.1.0](https://github.com/Candy-Doc/candy-cli/compare/v1.0.1...v1.1.0) (2023-04-28)
+
+        ## ✨ New minor Features
+            - [`38113ea`](https://github.com/Candy-Doc/candy-cli/commit/38113ea)  feat(test): Testing the CD
+
 # [v1.0.1](https://github.com/Candy-Doc/candy-cli/compare/v1.0.0...v1.0.1) (2023-04-28)
 
         ## 🐛 Bug Fixes
