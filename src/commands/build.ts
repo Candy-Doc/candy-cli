@@ -1,7 +1,7 @@
 import { Command, Option } from 'clipanion';
 import * as t from 'typanion';
 import cli from '../services/cli';
-// import {copy} from 'fs-extra';
+import { outputFile } from 'fs-extra';
 import { createDownloadStream } from '../tools/download';
 import { getPackageLatestVersionUrl } from '../tools/npm';
 import { createUnTarStream } from '../tools/archive';
@@ -41,10 +41,9 @@ class Build extends Command {
     this.buildName = this.buildName ? this.buildName : 'candy-build';
     const finalDir = path.join(this.extractDir, this.buildName);
     try {
-      // await copy(this.JSONpath, `${finalDir}/candy-data.json`);
       const jsonFile = JSON.parse(fs.readFileSync(this.JSONpath, 'utf-8'));
       const JsonForCytoscape = new CytoscapeAdapter(jsonFile).adapt();
-      fs.writeFileSync(`${finalDir}/candy-data.json`, JsonForCytoscape);
+      await outputFile(`${finalDir}/candy-data.json`, JsonForCytoscape);
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);
       const unTarStream = createUnTarStream(finalDir);
