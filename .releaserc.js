@@ -11,7 +11,7 @@ const commitTemplate = readFileAsync(
 
 module.exports = {
     branches: [
-        'main'
+        'feat/JsonAdapter'
     ],
     plugins: [
         [
