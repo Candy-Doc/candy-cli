@@ -1,14 +1,14 @@
 import { Command, Option } from 'clipanion';
 import * as t from 'typanion';
 import cli from '../services/cli';
-import { copy } from 'fs-extra';
+// import {copy} from 'fs-extra';
 import { createDownloadStream } from '../tools/download';
 import { getPackageLatestVersionUrl } from '../tools/npm';
 import { createUnTarStream } from '../tools/archive';
 import { pipeline } from 'stream/promises';
 import path from 'path';
-import {CytoscapeAdapter} from "../tools/adapter/CytoscapeAdapter";
-import fs from "fs";
+import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
+import fs from 'fs';
 
 class Build extends Command {
   static paths = [[`build`], [`b`], Command.Default];

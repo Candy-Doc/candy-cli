@@ -20,7 +20,9 @@
       "simpleName": "EntityOne",
       "description": "",
       "dependencies": [],
-      "warnings": ["NO_ID"]
+      "warnings": [
+        "NO_ID"
+      ]
     }
   }
 }

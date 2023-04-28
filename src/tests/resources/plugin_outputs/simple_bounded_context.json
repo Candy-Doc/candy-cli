@@ -52,7 +52,9 @@
           "allowed": true
         }
       ],
-      "warnings": ["NO_ID"]
+      "warnings": [
+        "NO_ID"
+      ]
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne": {
       "type": "VALUE_OBJECT",

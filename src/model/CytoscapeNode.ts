@@ -1,14 +1,16 @@
-import {CytoscapePattern} from "../tools/adapter/CytoscapePattern";
-import {CytoscapeNodeDto} from "./DTO/CytoscapeNodeDto";
-import {CytoscapeAdapter} from "../tools/adapter/CytoscapeAdapter";
+import { CytoscapePattern } from '../tools/adapter/CytoscapePattern';
+import { CytoscapeNodeDto } from './DTO/CytoscapeNodeDto';
+import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
 
 export class CytoscapeNode {
   get classes(): CytoscapePattern {
     return this._classes;
   }
+
   get id(): string {
     return this._id;
   }
+
   private readonly _id: string;
   private readonly _label: string;
   private readonly _parents: Array<string>;
@@ -24,12 +26,15 @@ export class CytoscapeNode {
     this._warnings = new Array<string>();
     this._parents = new Array<string>();
   }
+
   public addParent(parentId: string) {
     this._parents.push(parentId);
   }
+
   public addWarning(warningCode: string) {
     this._warnings.push(warningCode);
   }
+
   public addError(errorCode: string) {
     this._errors.push(errorCode);
   }
