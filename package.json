@@ -1,6 +1,6 @@
 {
-  "name": "candy-doc",
-  "version": "1.0.0",
+  "name": "@candy-doc/cli",
+  "version": "1.5.0",
   "main": "index.js",
   "license": "MIT",
   "publishConfig": {
@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "postbuild": "cp package.json yarn.lock ./dist",
+    "postbuild": "cp package*.json ./dist",
     "lint": "eslint --ext .ts ./src",
     "lint-fix": "eslint --fix --ext .ts ./src",
     "type-check": "tsc --noEmit",
@@ -50,7 +50,7 @@
     "typanion": "^3.8.0"
   },
   "volta": {
-    "node": "16.15.0",
-    "yarn": "1.22.18"
+    "node": "18.16.0",
+    "npm": "9.6.5"
   }
 }
