@@ -8,6 +8,7 @@ const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs/';
 const INPUTS_DIR = 'src/tests/resources/ui_inputs';
 const SIMPLE_MANIFEST = 'manifest_with_one_json.json';
 const TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS = 'two_bounded_contexts_without_interaction.json';
+const TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS = 'two_bounded_contexts_with_interaction.json';
 const ALONE_AGGREGATE = 'alone_aggregate.json';
 
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
@@ -24,6 +25,12 @@ describe('Creation of an unique file from all json files classified in the manif
   it('gets a single json in a manifest', () => {
     const actualJson = buildActualJsonForCytoscapeFrom(SIMPLE_MANIFEST);
     const expectedJson = getExpectedJsonFrom(ALONE_AGGREGATE);
+
+    assert.deepStrictEqual(actualJson, expectedJson);
+  });
+  it('merges two simple bounded context with interaction', () => {
+    const actualJson = buildActualJsonForCytoscapeFrom(TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS);
+    const expectedJson = getExpectedJsonFrom(TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS);
 
     assert.deepStrictEqual(actualJson, expectedJson);
   });

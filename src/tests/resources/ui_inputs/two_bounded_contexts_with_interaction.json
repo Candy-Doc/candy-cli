@@ -1,0 +1,69 @@
+[
+  {
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
+    },
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "Bounded context one"
+    },
+    "classes": "aggregate"
+  },
+  {
+    "data": {
+      "id": "Bounded context four",
+      "label": "Bounded context four"
+    },
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateFour",
+      "label": "AggregateFour",
+      "parent": "Bounded context four"
+    },
+    "classes": "aggregate"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandFour",
+      "label": "DomainCommandFour",
+      "parent": "Bounded context four"
+    },
+    "classes": "command"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventFour",
+      "label": "DomainEventFour",
+      "parent": "Bounded context four"
+    },
+    "classes": "event"
+  },
+  {
+    "data": {
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateFour",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventFour"
+    }
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandFour",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateFour"
+    }
+  },
+  {
+    "data": {
+      "id": 3,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventFour",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    }
+  }
+]
