@@ -7,8 +7,11 @@ import { getPackageLatestVersionUrl } from '../tools/npm';
 import { createUnTarStream } from '../tools/archive';
 import { pipeline } from 'stream/promises';
 import path from 'path';
-import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
 import fs from 'fs';
+import { ManifestJson } from '../model/ManifestJson';
+import { Manifest } from '../model/Manifest';
+
+const MANIFEST_FILE_NAME = 'MANIFEST.json';
 
 class Build extends Command {
   static paths = [[`build`], [`b`], Command.Default];
@@ -17,12 +20,12 @@ class Build extends Command {
     category: `Build`,
     description: `Build your candy-board`,
     details: `
-      Build your candy-board frontend with your JSON output.
+      Build your candy-board frontend with your JSON outputs.
     `,
-    examples: [[`Basic`, `$0 build ./maven-plugin-output.json`]],
+    examples: [[`Basic`, `$0 build ./maven-plugin-output/`]],
   });
 
-  JSONpath = Option.String({ validator: t.isString() });
+  pluginOutputDirectory = Option.String({ validator: t.isString() });
 
   extractDir = Option.String('-e,--extract-dir', {
     validator: t.isString(),
@@ -40,9 +43,11 @@ class Build extends Command {
     this.extractDir = this.extractDir ? this.extractDir : './';
     this.buildName = this.buildName ? this.buildName : 'candy-build';
     const finalDir = path.join(this.extractDir, this.buildName);
+    const manifestPath = path.join(this.pluginOutputDirectory, MANIFEST_FILE_NAME);
     try {
-      const jsonFile = JSON.parse(fs.readFileSync(this.JSONpath, 'utf-8'));
-      const JsonForCytoscape = new CytoscapeAdapter(jsonFile).adapt();
+      const manifestFile: ManifestJson = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+      const manifest = new Manifest(manifestFile, this.pluginOutputDirectory);
+      const JsonForCytoscape = manifest.toCytoscape();
       await outputFile(`${finalDir}/candy-data.json`, JsonForCytoscape);
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);
