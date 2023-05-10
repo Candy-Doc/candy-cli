@@ -22,6 +22,10 @@ export class Manifest {
 
   private getJsonFromPath(filePath: string, outputDir: string): UbiquitousLanguageJson {
     const absolutePath = path.join(outputDir, filePath);
-    return JSON.parse(fs.readFileSync(absolutePath, 'utf-8'));
+    try {
+      return JSON.parse(fs.readFileSync(absolutePath, 'utf-8'));
+    } catch (e) {
+      throw new Error('CytoscapeAdapter: ' + filePath + ' - No such file');
+    }
   }
 }

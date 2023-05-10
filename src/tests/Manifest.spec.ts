@@ -9,6 +9,7 @@ const INPUTS_DIR = 'src/tests/resources/ui_inputs';
 const SIMPLE_MANIFEST = 'manifest_with_one_json';
 const TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS = 'two_bounded_contexts_without_interaction';
 const TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS = 'two_bounded_contexts_with_interaction';
+const NO_SUCH_FILE = 'no_such_file';
 const ALONE_AGGREGATE = 'alone_aggregate';
 
 const buildActualJsonForCytoscapeFrom = (dirName: string) => {
@@ -39,5 +40,16 @@ describe('Creation of an unique file from all json files classified in the manif
     const expectedJson = getExpectedJsonFrom(TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS);
 
     assert.deepStrictEqual(actualJson, expectedJson);
+  });
+  it('throws an error a json file is not in the same directory as the manifest', () => {
+    assert.throws(
+      () => {
+        buildActualJsonForCytoscapeFrom(NO_SUCH_FILE);
+      },
+      {
+        name: 'Error',
+        message: 'CytoscapeAdapter: /fake_file.json - No such file',
+      },
+    );
   });
 });
