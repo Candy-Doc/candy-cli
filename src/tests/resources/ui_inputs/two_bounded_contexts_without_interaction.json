@@ -1,0 +1,40 @@
+[
+  {
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
+    },
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "Bounded context one"
+    },
+    "classes": "aggregate"
+  },
+   {
+       "data": {
+         "id": "Bounded context three",
+         "label": "Bounded context three"
+       },
+       "classes": "boundedContext"
+     },
+     {
+       "data": {
+         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateThree",
+         "label": "AggregateThree",
+         "parent": "Bounded context three"
+       },
+       "classes": "aggregate"
+     },
+     {
+       "data": {
+         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityThree",
+         "label": "EntityThree",
+         "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateThree"
+       },
+       "classes": "entity"
+     }
+]

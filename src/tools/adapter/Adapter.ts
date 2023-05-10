@@ -2,7 +2,7 @@ import { UbiquitousLanguageJson } from '../../model/UbiquitousLanguageJson';
 import { UbiquitousLanguageDto } from '../../model/DTO/UbiquitousLanguageDto';
 
 export interface IAdapter {
-  ubiquitousLanguageDto: UbiquitousLanguageDto;
+  ubiquitousLanguageDtoArray: Array<UbiquitousLanguageDto>;
 
-  adapt(json: UbiquitousLanguageJson): string;
+  adapt(): string;
 }
