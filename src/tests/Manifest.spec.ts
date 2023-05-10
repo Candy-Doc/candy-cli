@@ -5,21 +5,20 @@ import { Manifest } from '../model/Manifest';
 import { ManifestJson } from '../model/ManifestJson';
 
 const OUTPUTS_DIR_MANIFEST = 'src/tests/resources/plugin_outputs/manifests';
-const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs/';
 const INPUTS_DIR = 'src/tests/resources/ui_inputs';
-const SIMPLE_MANIFEST = 'manifest_with_one_json.json';
-const TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS = 'two_bounded_contexts_without_interaction.json';
-const TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS = 'two_bounded_contexts_with_interaction.json';
-const ALONE_AGGREGATE = 'alone_aggregate.json';
+const SIMPLE_MANIFEST = 'manifest_with_one_json';
+const TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS = 'two_bounded_contexts_without_interaction';
+const TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS = 'two_bounded_contexts_with_interaction';
+const ALONE_AGGREGATE = 'alone_aggregate';
 
-const buildActualJsonForCytoscapeFrom = (fileName: string) => {
-  const filePath = path.join(OUTPUTS_DIR_MANIFEST, fileName);
+const buildActualJsonForCytoscapeFrom = (dirName: string) => {
+  const filePath = path.join(OUTPUTS_DIR_MANIFEST, dirName + '/MANIFEST.json');
   const manifestJson: ManifestJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const manifest = new Manifest(manifestJson, OUTPUTS_DIR);
+  const manifest = new Manifest(manifestJson, path.join(OUTPUTS_DIR_MANIFEST, dirName));
   return manifest.toCytoscape();
 };
 const getExpectedJsonFrom = (fileName: string) => {
-  const filePath = path.join(INPUTS_DIR, fileName);
+  const filePath = path.join(INPUTS_DIR, fileName + '.json');
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 };
 describe('Creation of an unique file from all json files classified in the manifest', () => {
