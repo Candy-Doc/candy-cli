@@ -1,3 +1,5 @@
-[
-    "alone_aggregate.json"
-]
+{
+  "files": [
+    "/alone_aggregate.json"
+  ]
+}

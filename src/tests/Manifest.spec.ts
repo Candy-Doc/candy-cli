@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import assert from 'assert';
 import { Manifest } from '../model/Manifest';
+import { ManifestJson } from '../model/ManifestJson';
 
 const OUTPUTS_DIR_MANIFEST = 'src/tests/resources/plugin_outputs/manifests';
 const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs/';
@@ -13,7 +14,7 @@ const ALONE_AGGREGATE = 'alone_aggregate.json';
 
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR_MANIFEST, fileName);
-  const manifestJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const manifestJson: ManifestJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   const manifest = new Manifest(manifestJson, OUTPUTS_DIR);
   return manifest.toCytoscape();
 };

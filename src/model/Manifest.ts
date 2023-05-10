@@ -2,14 +2,15 @@ import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
 import fs from 'fs';
 import path from 'path';
 import { UbiquitousLanguageJson } from './UbiquitousLanguageJson';
+import { ManifestJson } from './ManifestJson';
 
 export class Manifest {
   private outputDir: string;
   private ubiquitousLanguageJsonArray: Array<UbiquitousLanguageJson>;
 
-  constructor(manifestJson: string[], outputDir: string) {
+  constructor(manifestJson: ManifestJson, outputDir: string) {
     this.outputDir = outputDir;
-    this.ubiquitousLanguageJsonArray = manifestJson.map((filePath) =>
+    this.ubiquitousLanguageJsonArray = manifestJson.files.map((filePath) =>
       this.getJsonFromPath(filePath, outputDir),
     );
   }
