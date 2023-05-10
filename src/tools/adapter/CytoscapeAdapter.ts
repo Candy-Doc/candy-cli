@@ -12,10 +12,13 @@ export class CytoscapeAdapter implements IAdapter {
   private edgeCounter = 0;
   private nodes: Array<CytoscapeNode>;
   private edges: Array<CytoscapeEdgeDto>;
-  ubiquitousLanguageDto: UbiquitousLanguageDto;
+  ubiquitousLanguageDtoArray: Array<UbiquitousLanguageDto>;
 
-  constructor(ubiquitousLanguageJson: UbiquitousLanguageJson) {
-    this.ubiquitousLanguageDto = new UbiquitousLanguageDto(ubiquitousLanguageJson);
+  constructor(ubiquitousLanguageJsonArray: Array<UbiquitousLanguageJson>) {
+    this.ubiquitousLanguageDtoArray = ubiquitousLanguageJsonArray.map(
+      (ubiquitousLanguageJson: UbiquitousLanguageJson) =>
+        new UbiquitousLanguageDto(ubiquitousLanguageJson),
+    );
     this.nodes = new Array<CytoscapeNode>();
     this.edges = new Array<CytoscapeEdgeDto>();
   }
@@ -25,9 +28,15 @@ export class CytoscapeAdapter implements IAdapter {
   }
 
   private toCytoscapeDto(): CytoscapeDto {
-    this.addBoundedContext();
-    this.addDomainModelsElements();
-    this.addDependencies();
+    this.ubiquitousLanguageDtoArray.forEach((ubiquitousLanguageDto: UbiquitousLanguageDto) => {
+      this.addBoundedContext(ubiquitousLanguageDto);
+      this.addDomainModelsElements(ubiquitousLanguageDto);
+    });
+
+    this.ubiquitousLanguageDtoArray.forEach((ubiquitousLanguageDto: UbiquitousLanguageDto) => {
+      this.addDependencies(ubiquitousLanguageDto);
+    });
+
     return this.createCytoscapeDto();
   }
 
@@ -56,23 +65,23 @@ export class CytoscapeAdapter implements IAdapter {
     dependencyNode.classes === CytoscapePattern.VALUE_OBJECT ||
     parentNode.classes === CytoscapePattern.DOMAIN_ENTITY;
 
-  private addBoundedContext() {
+  private addBoundedContext(ubiquitousLanguageDto: UbiquitousLanguageDto) {
     const boundedContextNode: CytoscapeNode = new CytoscapeNode(
-      this.ubiquitousLanguageDto.name,
-      this.ubiquitousLanguageDto.name,
-      PatternFormatter.toCytoscapeFormat(this.ubiquitousLanguageDto.type),
+      ubiquitousLanguageDto.name,
+      ubiquitousLanguageDto.name,
+      PatternFormatter.toCytoscapeFormat(ubiquitousLanguageDto.type),
     );
     this.nodes.push(boundedContextNode);
   }
 
-  private addDomainModelsElements() {
-    this.ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
+  private addDomainModelsElements(ubiquitousLanguageDto: UbiquitousLanguageDto) {
+    ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
       const domainModelNode: CytoscapeNode = new CytoscapeNode(
         domainModelId,
         domainModelDto.simpleName,
         PatternFormatter.toCytoscapeFormat(domainModelDto.type),
       );
-      domainModelNode.addParent(this.ubiquitousLanguageDto.name);
+      domainModelNode.addParent(ubiquitousLanguageDto.name);
       domainModelDto.warnings?.forEach((warning: string) => {
         domainModelNode.addWarning(warning);
       });
@@ -80,8 +89,8 @@ export class CytoscapeAdapter implements IAdapter {
     });
   }
 
-  private addDependencies() {
-    this.ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
+  private addDependencies(ubiquitousLanguageDto: UbiquitousLanguageDto) {
+    ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
       domainModelDto.dependencies.forEach((dependencyDto) => {
         const dependencyNode: CytoscapeNode | undefined = this.getNode(dependencyDto.refersTo);
         const parentNode = this.getNode(domainModelId);
