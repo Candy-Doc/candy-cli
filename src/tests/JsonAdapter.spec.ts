@@ -23,7 +23,7 @@ const getExpectedJsonFrom = (fileName: string) => {
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
   const jsonFile = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const adaptedJson = new CytoscapeAdapter(jsonFile).adapt();
+  const adaptedJson = new CytoscapeAdapter(Array.of(jsonFile)).adapt();
   return JSON.parse(adaptedJson);
 };
 
@@ -57,7 +57,7 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     const jsonWithUnknownPattern = JSON.parse(fs.readFileSync(jsonWithUnknownPatternPath, 'utf-8'));
     assert.throws(
       () => {
-        const modifiedJson = new CytoscapeAdapter(jsonWithUnknownPattern).adapt();
+        const modifiedJson = new CytoscapeAdapter(Array.of(jsonWithUnknownPattern)).adapt();
       },
       {
         name: 'Error',
