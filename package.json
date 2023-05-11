@@ -1,6 +1,6 @@
 {
-  "name": "candy-doc",
-  "version": "1.0.0",
+  "name": "@candy-doc/cli",
+  "version": "1.5.0",
   "main": "index.js",
   "license": "MIT",
   "publishConfig": {
@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "postbuild": "cp package.json yarn.lock ./dist",
+    "postbuild": "cp package*.json ./dist",
     "lint": "eslint --ext .ts ./src",
     "lint-fix": "eslint --fix --ext .ts ./src",
     "type-check": "tsc --noEmit",
@@ -28,13 +28,14 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.23",
     "@types/tar": "^6.1.1",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.15",
     "prettier": "^2.6.2",
+    "semantic-release-gitmoji": "^1.6.4",
     "ts-node": "^10.7.0",
     "tslib": "^2.3.1",
     "typescript": "^4.6.4"
@@ -49,7 +50,7 @@
     "typanion": "^3.8.0"
   },
   "volta": {
-    "node": "16.15.0",
-    "yarn": "1.22.18"
+    "node": "18.16.0",
+    "npm": "9.6.5"
   }
 }
