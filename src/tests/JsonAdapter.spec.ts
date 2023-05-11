@@ -4,8 +4,15 @@ import path from 'path';
 import * as fs from 'fs';
 import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
 
+import aloneAggregate from './resources/ui_inputs/alone_aggregate.json';
+import aggregateWithEdges from './resources/ui_inputs/aggregate_with_edges.json';
+import aggregateWithEntity from './resources/ui_inputs/aggregate_with_entity.json';
+import simpleBoundedContext from './resources/ui_inputs/simple_bounded_context.json';
+import ubiquitousLanguageWithWarning from './resources/ui_inputs/ubiquitous_language_with_warning.json';
+import ubiquitousLanguageWithNotAllowedDependencies from './resources/ui_inputs/ubiquitous_language_with_not_allowed_dependencies.json';
+import entityWithTwoParents from './resources/ui_inputs/entity_with_two_parents.json';
+
 const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs';
-const INPUTS_DIR = 'src/tests/resources/ui_inputs';
 const ALONE_AGGREGATE = 'alone_aggregate.json';
 const AGGREGATE_WITH_EDGES = 'aggregate_with_edges.json';
 const AGGREGATE_WITH_ENTITY = 'aggregate_with_entity.json';
@@ -15,10 +22,6 @@ const UBIQUITOUS_LANGUAGE_WITH_WARNING = 'ubiquitous_language_with_warning.json'
 const UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES =
   'ubiquitous_language_with_not_allowed_dependencies.json';
 const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
-const getExpectedJsonFrom = (fileName: string) => {
-  const filePath = path.join(INPUTS_DIR, fileName);
-  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-};
 
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
@@ -29,28 +32,24 @@ const buildActualJsonForCytoscapeFrom = (fileName: string) => {
 
 describe('Json Adapter from plugin output to candy-board input', () => {
   it('adapts concepts', function () {
-    const expectedJson = getExpectedJsonFrom(ALONE_AGGREGATE);
     const modifiedJson = buildActualJsonForCytoscapeFrom(ALONE_AGGREGATE);
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, aloneAggregate);
   });
   it('adapts concepts with edges', () => {
-    const expectedJson = getExpectedJsonFrom(AGGREGATE_WITH_EDGES);
     const modifiedJson = buildActualJsonForCytoscapeFrom(AGGREGATE_WITH_EDGES);
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, aggregateWithEdges);
   });
   it('adapts clustered entity', () => {
-    const expectedJson = getExpectedJsonFrom(AGGREGATE_WITH_ENTITY);
     const modifiedJson = buildActualJsonForCytoscapeFrom(AGGREGATE_WITH_ENTITY);
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, aggregateWithEntity);
   });
   it('adapts a simple bounded context', () => {
-    const expectedJson = getExpectedJsonFrom(SIMPLE_BOUNDED_CONTEXT);
     const modifiedJson = buildActualJsonForCytoscapeFrom(SIMPLE_BOUNDED_CONTEXT);
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, simpleBoundedContext);
   });
   it('throw an error if the pattern is not known', () => {
     const jsonWithUnknownPatternPath = path.join(OUTPUTS_DIR, JSON_WITH_UNKNOWN_PATTERN);
@@ -66,29 +65,20 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     );
   });
   it('adapts ubiquitous language with warnings', () => {
-    const expectedJson = getExpectedJsonFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
     const modifiedJson = buildActualJsonForCytoscapeFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, ubiquitousLanguageWithWarning);
   });
   it('creates errors from not allowed dependencies', () => {
-    const expectedJson = getExpectedJsonFrom(UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES);
     const modifiedJson = buildActualJsonForCytoscapeFrom(
       UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES,
     );
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, ubiquitousLanguageWithNotAllowedDependencies);
   });
   it('creates edges for an entity/value object shared by 2 parents', () => {
-    const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
     const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
 
-    assert.deepStrictEqual(modifiedJson, expectedJson);
-  });
-  it('creates a single json from multiples json', () => {
-    const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
-    const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
-
-    assert.deepStrictEqual(modifiedJson, expectedJson);
+    assert.deepStrictEqual(modifiedJson, entityWithTwoParents);
   });
 });

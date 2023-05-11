@@ -66,7 +66,7 @@ describe('Cytoscape DTO', () => {
   it('write a Json file for cytoscape', function () {
     const elements = [boundedContext, aggregate];
     const cytoscapeDto = new CytoscapeDto(elements);
-    assert.equal(cytoscapeDto.json(), JSON.stringify(aloneAggregateJson));
+    assert.deepStrictEqual(JSON.parse(cytoscapeDto.json()), aloneAggregateJson);
   });
 
   it('write a Json file with edges for cytoscape', function () {
@@ -79,6 +79,6 @@ describe('Cytoscape DTO', () => {
       edgeFromAggregateToCommand,
     ];
     const cytoscapeDto = new CytoscapeDto(elements);
-    assert.equal(cytoscapeDto.json(), JSON.stringify(aggregateWithEdgesJson));
+    assert.deepStrictEqual(JSON.parse(cytoscapeDto.json()), aggregateWithEdgesJson);
   });
 });
