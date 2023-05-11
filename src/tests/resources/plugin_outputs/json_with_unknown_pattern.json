@@ -7,8 +7,7 @@
       "type": "UNKNOWN_PATTERN",
       "simpleName": "UnknownPattern",
       "description": "I'm an unknown pattern",
-      "dependencies": [],
-      "warnings": []
+      "dependencies": []
     }
   }
 }

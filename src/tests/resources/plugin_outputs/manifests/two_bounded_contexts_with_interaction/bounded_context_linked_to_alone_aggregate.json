@@ -12,8 +12,7 @@
           "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventFour",
           "allowed": true
         }
-      ],
-      "warnings": []
+      ]
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandFour": {
       "type": "DOMAIN_COMMAND",
@@ -24,8 +23,7 @@
           "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateFour",
           "allowed": true
         }
-      ],
-      "warnings": []
+      ]
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventFour": {
       "type": "DOMAIN_EVENT",
@@ -36,8 +34,7 @@
           "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
           "allowed": true
         }
-      ],
-      "warnings": []
+      ]
     }
   }
 }

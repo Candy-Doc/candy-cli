@@ -11,7 +11,6 @@ const AGGREGATE_WITH_EDGES = 'aggregate_with_edges.json';
 const AGGREGATE_WITH_ENTITY = 'aggregate_with_entity.json';
 const SIMPLE_BOUNDED_CONTEXT = 'simple_bounded_context.json';
 const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
-const UBIQUITOUS_LANGUAGE_WITH_WARNING = 'ubiquitous_language_with_warning.json';
 const UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES =
   'ubiquitous_language_with_not_allowed_dependencies.json';
 const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
@@ -65,12 +64,6 @@ describe('Json Adapter from plugin output to candy-board input', () => {
       },
     );
   });
-  it('adapts ubiquitous language with warnings', () => {
-    const expectedJson = getExpectedJsonFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
-    const modifiedJson = buildActualJsonForCytoscapeFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
-
-    assert.deepStrictEqual(modifiedJson, expectedJson);
-  });
   it('creates errors from not allowed dependencies', () => {
     const expectedJson = getExpectedJsonFrom(UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES);
     const modifiedJson = buildActualJsonForCytoscapeFrom(
@@ -80,12 +73,6 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     assert.deepStrictEqual(modifiedJson, expectedJson);
   });
   it('creates edges for an entity/value object shared by 2 parents', () => {
-    const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
-    const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
-
-    assert.deepStrictEqual(modifiedJson, expectedJson);
-  });
-  it('creates a single json from multiples json', () => {
     const expectedJson = getExpectedJsonFrom(ENTITY_WITH_TWO_PARENTS);
     const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
 

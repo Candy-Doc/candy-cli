@@ -48,7 +48,7 @@ class Build extends Command {
       const manifestFile: ManifestJson = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
       const manifest = new Manifest(manifestFile, this.pluginOutputDirectory);
       const JsonForCytoscape = manifest.toCytoscape();
-      await outputFile(`${finalDir}/candy-data.json`, JsonForCytoscape);
+      await outputFile(`${finalDir}/candy-data.json`, JSON.stringify(JsonForCytoscape));
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);
       const unTarStream = createUnTarStream(finalDir);

@@ -14,7 +14,6 @@ export class CytoscapeNode {
   private readonly _id: string;
   private readonly _label: string;
   private readonly _parents: Array<string>;
-  private readonly _warnings: Array<string>;
   private readonly _errors: Array<string>;
   private readonly _classes: CytoscapePattern;
 
@@ -23,16 +22,11 @@ export class CytoscapeNode {
     this._label = label;
     this._classes = classes;
     this._errors = new Array<string>();
-    this._warnings = new Array<string>();
     this._parents = new Array<string>();
   }
 
   public addParent(parentId: string) {
     this._parents.push(parentId);
-  }
-
-  public addWarning(warningCode: string) {
-    this._warnings.push(warningCode);
   }
 
   public addError(errorCode: string) {
@@ -48,7 +42,6 @@ export class CytoscapeNode {
         parent:
           this._parents.length > 2 ? this.adaptToEdgeDependencies(adapter) : this._parents.at(-1),
         errors: this._errors.length > 0 ? this._errors : undefined,
-        warnings: this._warnings.length > 0 ? this._warnings : undefined,
       },
     };
   }

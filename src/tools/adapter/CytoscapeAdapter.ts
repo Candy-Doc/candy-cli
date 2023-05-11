@@ -82,9 +82,6 @@ export class CytoscapeAdapter implements IAdapter {
         PatternFormatter.toCytoscapeFormat(domainModelDto.type),
       );
       domainModelNode.addParent(ubiquitousLanguageDto.name);
-      domainModelDto.warnings?.forEach((warning: string) => {
-        domainModelNode.addWarning(warning);
-      });
       this.nodes.push(domainModelNode);
     });
   }
