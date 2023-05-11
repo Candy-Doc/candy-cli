@@ -16,22 +16,19 @@
           "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
           "allowed": true
         }
-      ],
-      "warnings": []
+      ]
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne": {
       "type": "DOMAIN_EVENT",
       "simpleName": "DomainEventOne",
       "description": "",
-      "dependencies": [],
-      "warnings": []
+      "dependencies": []
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne": {
       "type": "AGGREGATE",
       "simpleName": "AggregateOne",
       "description": "",
-      "dependencies": [],
-      "warnings": []
+      "dependencies": []
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne": {
       "type": "DOMAIN_ENTITY",
@@ -42,8 +39,7 @@
           "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
           "allowed": false
         }
-      ],
-      "warnings": []
+      ]
     }
   }
 }

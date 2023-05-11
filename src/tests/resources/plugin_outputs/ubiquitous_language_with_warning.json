@@ -12,17 +12,13 @@
           "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
           "allowed": true
         }
-      ],
-      "warnings": []
+      ]
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne": {
       "type": "DOMAIN_ENTITY",
       "simpleName": "EntityOne",
       "description": "",
-      "dependencies": [],
-      "warnings": [
-        "NO_ID"
-      ]
+      "dependencies": []
     }
   }
 }

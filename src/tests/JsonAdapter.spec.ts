@@ -8,7 +8,6 @@ import aloneAggregate from './resources/ui_inputs/alone_aggregate.json';
 import aggregateWithEdges from './resources/ui_inputs/aggregate_with_edges.json';
 import aggregateWithEntity from './resources/ui_inputs/aggregate_with_entity.json';
 import simpleBoundedContext from './resources/ui_inputs/simple_bounded_context.json';
-import ubiquitousLanguageWithWarning from './resources/ui_inputs/ubiquitous_language_with_warning.json';
 import ubiquitousLanguageWithNotAllowedDependencies from './resources/ui_inputs/ubiquitous_language_with_not_allowed_dependencies.json';
 import entityWithTwoParents from './resources/ui_inputs/entity_with_two_parents.json';
 
@@ -18,7 +17,6 @@ const AGGREGATE_WITH_EDGES = 'aggregate_with_edges.json';
 const AGGREGATE_WITH_ENTITY = 'aggregate_with_entity.json';
 const SIMPLE_BOUNDED_CONTEXT = 'simple_bounded_context.json';
 const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
-const UBIQUITOUS_LANGUAGE_WITH_WARNING = 'ubiquitous_language_with_warning.json';
 const UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES =
   'ubiquitous_language_with_not_allowed_dependencies.json';
 const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
@@ -63,11 +61,6 @@ describe('Json Adapter from plugin output to candy-board input', () => {
         message: 'PatternFormatter : This pattern is unknown.',
       },
     );
-  });
-  it('adapts ubiquitous language with warnings', () => {
-    const modifiedJson = buildActualJsonForCytoscapeFrom(UBIQUITOUS_LANGUAGE_WITH_WARNING);
-
-    assert.deepStrictEqual(modifiedJson, ubiquitousLanguageWithWarning);
   });
   it('creates errors from not allowed dependencies', () => {
     const modifiedJson = buildActualJsonForCytoscapeFrom(

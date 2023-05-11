@@ -42,7 +42,7 @@ class Build extends Command {
     const finalDir = path.join(this.extractDir, this.buildName);
     try {
       const jsonFile = JSON.parse(fs.readFileSync(this.JSONpath, 'utf-8'));
-      const jsonForCytoscape = new CytoscapeAdapter(jsonFile).adapt();
+      const jsonForCytoscape = new CytoscapeAdapter().adapt(jsonFile);
       await outputFile(`${finalDir}/candy-data.json`, jsonForCytoscape);
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);
