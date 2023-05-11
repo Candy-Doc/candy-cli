@@ -5,5 +5,5 @@ export type UbiquitousLanguageJson = {
   type: UbiquitousLanguagePattern;
   name: string;
   description: string;
-  domainModels: Map<string, DomainModelJson>;
+  domainModels: Record<string, DomainModelJson>;
 };

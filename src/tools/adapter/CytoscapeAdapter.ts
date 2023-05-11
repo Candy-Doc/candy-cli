@@ -65,46 +65,50 @@ export class CytoscapeAdapter implements IAdapter {
   }
 
   private addDomainModelsElements(ubiquitousLanguageDto: UbiquitousLanguageDto) {
-    ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
-      const domainModelNode: CytoscapeNode = new CytoscapeNode(
-        domainModelId,
-        domainModelDto.simpleName,
-        PatternFormatter.toCytoscapeFormat(domainModelDto.type),
-      );
-      domainModelNode.addParent(ubiquitousLanguageDto.name);
-      domainModelDto.warnings?.forEach((warning: string) => {
-        domainModelNode.addWarning(warning);
-      });
-      this.nodes.push(domainModelNode);
-    });
+    Object.entries(ubiquitousLanguageDto.domainModels).forEach(
+      ([domainModelId, domainModelDto]) => {
+        const domainModelNode: CytoscapeNode = new CytoscapeNode(
+          domainModelId,
+          domainModelDto.simpleName,
+          PatternFormatter.toCytoscapeFormat(domainModelDto.type),
+        );
+        domainModelNode.addParent(ubiquitousLanguageDto.name);
+        domainModelDto.warnings?.forEach((warning: string) => {
+          domainModelNode.addWarning(warning);
+        });
+        this.nodes.push(domainModelNode);
+      },
+    );
   }
 
   private addDependencies(ubiquitousLanguageDto: UbiquitousLanguageDto) {
-    ubiquitousLanguageDto.domainModels.forEach((domainModelDto, domainModelId) => {
-      domainModelDto.dependencies.forEach((dependencyDto) => {
-        const dependencyNode: CytoscapeNode | undefined = this.getNode(dependencyDto.refersTo);
-        const parentNode = this.getNode(domainModelId);
-        if (dependencyNode && parentNode) {
-          if (!dependencyDto.allowed) {
-            parentNode.addError(NOT_ALLOWED_DEPENDENCIES);
-            dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES);
+    Object.entries(ubiquitousLanguageDto.domainModels).forEach(
+      ([domainModelId, domainModelDto]) => {
+        domainModelDto.dependencies.forEach((dependencyDto) => {
+          const dependencyNode: CytoscapeNode | undefined = this.getNode(dependencyDto.refersTo);
+          const parentNode = this.getNode(domainModelId);
+          if (dependencyNode && parentNode) {
+            if (!dependencyDto.allowed) {
+              parentNode.addError(NOT_ALLOWED_DEPENDENCIES);
+              dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES);
+            }
+            if (this.isNodeDependency(parentNode, dependencyNode)) {
+              dependencyNode.addParent(domainModelId);
+            } else {
+              const domainModelEdge: CytoscapeEdgeDto = {
+                data: {
+                  id: this.newEdgeId(),
+                  source: domainModelId,
+                  target: dependencyDto.refersTo,
+                  errors: dependencyDto.allowed ? undefined : [NOT_ALLOWED_DEPENDENCIES],
+                },
+              };
+              this.edges.push(domainModelEdge);
+            }
           }
-          if (this.isNodeDependency(parentNode, dependencyNode)) {
-            dependencyNode.addParent(domainModelId);
-          } else {
-            const domainModelEdge: CytoscapeEdgeDto = {
-              data: {
-                id: this.newEdgeId(),
-                source: domainModelId,
-                target: dependencyDto.refersTo,
-                errors: dependencyDto.allowed ? undefined : [NOT_ALLOWED_DEPENDENCIES],
-              },
-            };
-            this.edges.push(domainModelEdge);
-          }
-        }
-      });
-    });
+        });
+      },
+    );
   }
 
   private createCytoscapeDto(): CytoscapeDto {

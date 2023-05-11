@@ -16,17 +16,17 @@ describe('Ubiquitous language DTO', () => {
     assert.equal(ubiquitousLanguageDto.type, 'BOUNDED_CONTEXT');
     assert.equal(ubiquitousLanguageDto.name, 'Bounded context one');
     assert.equal(ubiquitousLanguageDto.description, 'Describe the bounded context here');
-    assert.equal(ubiquitousLanguageDto.domainModels.size, 1);
+    assert.equal(Object.keys(ubiquitousLanguageDto.domainModels).length, 1);
     assert.equal(
-      ubiquitousLanguageDto.domainModels.get(
-        'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
-      )?.type,
+      ubiquitousLanguageDto.domainModels[
+        'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne'
+      ]?.type,
       'AGGREGATE',
     );
     assert.equal(
-      ubiquitousLanguageDto.domainModels.get(
-        'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne',
-      )?.dependencies.length,
+      ubiquitousLanguageDto.domainModels[
+        'io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne'
+      ]?.dependencies.length,
       0,
     );
   });
