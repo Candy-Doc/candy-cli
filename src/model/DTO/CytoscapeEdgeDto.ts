@@ -3,6 +3,6 @@ export type CytoscapeEdgeDto = {
     id: number;
     source: string;
     target: string;
-    errors?: Array<string>;
+    errors?: string[];
   };
 };

@@ -6,5 +6,5 @@ export type DomainModelJson = {
   simpleName: string;
   description: string;
   dependencies: Array<DependencyJson>;
-  warnings: Array<string>;
+  warnings: string[];
 };

@@ -13,18 +13,18 @@ export class CytoscapeNode {
 
   private readonly _id: string;
   private readonly _label: string;
-  private readonly _parents: Array<string>;
-  private readonly _warnings: Array<string>;
-  private readonly _errors: Array<string>;
+  private readonly _parents: string[];
+  private readonly _warnings: string[];
+  private readonly _errors: string[];
   private readonly _classes: CytoscapePattern;
 
   constructor(id: string, label: string, classes: CytoscapePattern) {
     this._id = id;
     this._label = label;
     this._classes = classes;
-    this._errors = new Array<string>();
-    this._warnings = new Array<string>();
-    this._parents = new Array<string>();
+    this._errors = [];
+    this._warnings = [];
+    this._parents = [];
   }
 
   public addParent(parentId: string) {

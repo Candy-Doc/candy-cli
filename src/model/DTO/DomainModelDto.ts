@@ -7,19 +7,17 @@ export class DomainModelDto {
   private readonly _simpleName: string;
   private readonly _description: string;
   private readonly _dependencies: Array<DependencyDto>;
-  private readonly _warnings?: Array<string>;
-  private readonly _errors?: Array<string>;
-
-  /*private _parent: Array<string>;*/
+  private readonly _warnings?: string[];
+  private readonly _errors?: string[];
 
   constructor(domainModel: DomainModelJson) {
     this._type = domainModel.type;
     this._simpleName = domainModel.simpleName;
     this._description = domainModel.description;
-    this._dependencies = new Array<DependencyDto>();
-    for (const dependency of domainModel.dependencies) {
-      this._dependencies.push(new DependencyDto(dependency));
-    }
+    this._dependencies = domainModel.dependencies.map(
+      (dependency) => new DependencyDto(dependency),
+    );
+
     this._warnings = hasWarning(domainModel) ? fillWarnings(domainModel) : undefined;
   }
 
@@ -39,13 +37,13 @@ export class DomainModelDto {
     return this._dependencies;
   }
 
-  get warnings(): Array<string> | undefined {
+  get warnings(): string[] | undefined {
     return this._warnings;
   }
 }
 
-const fillWarnings = (domainModel: DomainModelJson): Array<string> => {
-  const warnings = new Array<string>();
+const fillWarnings = (domainModel: DomainModelJson): string[] => {
+  const warnings = [];
   for (const warning of domainModel.warnings) {
     warnings.push(warning);
   }
