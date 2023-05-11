@@ -3,7 +3,7 @@ name: Publish a new release
 on:
   push:
     branches:
-    - feat/JsonAdapter
+    - main
 
 jobs:
   release:
