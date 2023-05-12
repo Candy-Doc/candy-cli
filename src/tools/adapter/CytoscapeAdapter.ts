@@ -9,6 +9,16 @@ import { NOT_ALLOWED_DEPENDENCIES } from './ErrorCodes';
 import { CytoscapeNode } from '../../model/CytoscapeNode';
 
 export class CytoscapeAdapter implements IAdapter {
+  private static NODE_DEPENDENCIES: [CytoscapePattern, CytoscapePattern][] = [
+    [CytoscapePattern.AGGREGATE, CytoscapePattern.DOMAIN_ENTITY],
+    [CytoscapePattern.AGGREGATE, CytoscapePattern.VALUE_OBJECT],
+    [CytoscapePattern.DOMAIN_ENTITY, CytoscapePattern.DOMAIN_ENTITY],
+    [CytoscapePattern.DOMAIN_ENTITY, CytoscapePattern.AGGREGATE],
+    [CytoscapePattern.DOMAIN_ENTITY, CytoscapePattern.VALUE_OBJECT],
+    [CytoscapePattern.VALUE_OBJECT, CytoscapePattern.VALUE_OBJECT],
+    [CytoscapePattern.VALUE_OBJECT, CytoscapePattern.DOMAIN_ENTITY],
+  ];
+
   private edgeCounter = 0;
   private nodes: Array<CytoscapeNode>;
   private edges: Array<CytoscapeEdgeDto>;
@@ -50,10 +60,14 @@ export class CytoscapeAdapter implements IAdapter {
     });
   }
 
-  private isNodeDependency = (parentNode: CytoscapeNode, dependencyNode: CytoscapeNode): boolean =>
-    dependencyNode.classes === CytoscapePattern.DOMAIN_ENTITY ||
-    dependencyNode.classes === CytoscapePattern.VALUE_OBJECT ||
-    parentNode.classes === CytoscapePattern.DOMAIN_ENTITY;
+  private isNodeDependency = (
+    parentNodePatttern: CytoscapePattern,
+    dependencyNodePatttern: CytoscapePattern,
+  ): boolean =>
+    CytoscapeAdapter.NODE_DEPENDENCIES.some(
+      (nodeDependency) =>
+        nodeDependency[0] === parentNodePatttern && nodeDependency[1] === dependencyNodePatttern,
+    );
 
   private addBoundedContext(ubiquitousLanguageDto: UbiquitousLanguageDto) {
     const boundedContextNode: CytoscapeNode = new CytoscapeNode(
@@ -89,7 +103,7 @@ export class CytoscapeAdapter implements IAdapter {
               parentNode.addError(NOT_ALLOWED_DEPENDENCIES);
               dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES);
             }
-            if (this.isNodeDependency(parentNode, dependencyNode)) {
+            if (this.isNodeDependency(parentNode.classes, dependencyNode.classes)) {
               dependencyNode.addParent(domainModelId);
             } else {
               const domainModelEdge: CytoscapeEdgeDto = {

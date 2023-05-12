@@ -10,6 +10,7 @@ import aggregateWithEntity from './resources/ui_inputs/aggregate_with_entity.jso
 import simpleBoundedContext from './resources/ui_inputs/simple_bounded_context.json';
 import ubiquitousLanguageWithNotAllowedDependencies from './resources/ui_inputs/ubiquitous_language_with_not_allowed_dependencies.json';
 import entityWithTwoParents from './resources/ui_inputs/entity_with_two_parents.json';
+import eventPointingOnAValueObject from './resources/ui_inputs/event_pointing_on_a_value_object.json';
 
 const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs';
 const ALONE_AGGREGATE = 'alone_aggregate.json';
@@ -20,6 +21,7 @@ const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
 const UBIQUITOUS_LANGUAGE_WITH_NOT_ALLOWED_DEPENDENCIES =
   'ubiquitous_language_with_not_allowed_dependencies.json';
 const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
+const EVENT_POINTING_ON_A_VALUE_OBJECT = 'event_pointing_on_a_value_object.json';
 
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
@@ -73,5 +75,10 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     const modifiedJson = buildActualJsonForCytoscapeFrom(ENTITY_WITH_TWO_PARENTS);
 
     assert.deepStrictEqual(modifiedJson, entityWithTwoParents);
+  });
+  it('creates edges for an entity/value object shared by 2 parents if one of them is not an aggregate/entity or VO', () => {
+    const modifiedJson = buildActualJsonForCytoscapeFrom(EVENT_POINTING_ON_A_VALUE_OBJECT);
+
+    assert.deepStrictEqual(modifiedJson, eventPointingOnAValueObject);
   });
 });
