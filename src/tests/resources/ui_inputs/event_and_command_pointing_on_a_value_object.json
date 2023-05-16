@@ -1,0 +1,47 @@
+[
+  {
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
+    },
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
+      "label": "DomainCommandOne",
+      "parent": "Bounded context one"
+    },
+    "classes": "command"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "label": "DomainEventOne",
+      "parent": "Bounded context one"
+    },
+    "classes": "event"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne",
+      "label": "ValueObjectOne",
+      "parent": "Bounded context one"
+    },
+    "classes": "valueObject"
+  },
+  {
+    "data": {
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne"
+    }
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne"
+    }
+  }
+]
