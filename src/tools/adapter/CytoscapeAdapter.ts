@@ -104,7 +104,7 @@ export class CytoscapeAdapter implements IAdapter {
               dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES);
             }
             if (this.isNodeDependency(parentNode.classes, dependencyNode.classes)) {
-              dependencyNode.addParent(domainModelId);
+              dependencyNode.addParent(parentNode.id);
             } else {
               const domainModelEdge: CytoscapeEdgeDto = {
                 data: {
