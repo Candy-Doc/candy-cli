@@ -40,19 +40,31 @@ class Build extends Command {
   });
 
   async execute() {
+    console.log('*** EXECUTING CANDY-DOC BUILD ***');
     this.extractDir = this.extractDir ? this.extractDir : './';
     this.buildName = this.buildName ? this.buildName : 'candy-build';
     const finalDir = path.join(this.extractDir, this.buildName);
     const manifestPath = path.join(this.pluginOutputDirectory, MANIFEST_FILE_NAME);
     try {
+      console.log('candy-doc : Retrieving the manifest ...');
       const manifestFile: ManifestJson = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+      console.log('candy-doc : Retrieval OK');
+      console.log('candy-doc : Parsing the manifest ...');
       const manifest = new Manifest(manifestFile, this.pluginOutputDirectory);
+      console.log('candy-doc : Parsing OK');
+      console.log('candy-doc : Adapting the output ...');
       const JsonForCytoscape = manifest.toCytoscape();
+      console.log('candy-doc : Adapting OK');
+      console.log('candy-doc : Writing the new cytoscape input ...');
       await outputFile(`${finalDir}/candy-data.json`, JSON.stringify(JsonForCytoscape));
+      console.log('candy-doc : Writing OK');
+      console.log('candy-doc : Downloading candy-build ...');
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);
       const unTarStream = createUnTarStream(finalDir);
       await pipeline(downloadStream, unTarStream);
+      console.log('candy-doc : Downloading OK');
+      console.log('*** DONE ***');
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);

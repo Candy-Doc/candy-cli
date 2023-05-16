@@ -21,7 +21,7 @@ export class PatternFormatter {
     if (cytoscapePattern) {
       return cytoscapePattern;
     } else {
-      throw new Error('PatternFormatter : This pattern is unknown.');
+      throw new Error(`PatternFormatter : The pattern ${ubiquitousLanguagePattern} is unknown.`);
     }
   }
 }
