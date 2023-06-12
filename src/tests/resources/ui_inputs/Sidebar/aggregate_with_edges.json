@@ -1,0 +1,23 @@
+[
+  {
+    "id": "Bounded context one",
+    "name": "Bounded context one",
+    "children": [
+      {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+        "name": "AggregateOne",
+        "children": []
+      },
+      {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+        "name": "DomainEventOne",
+        "children": []
+      },
+      {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
+        "name": "DomainCommandOne",
+        "children": []
+      }
+    ]
+  }
+]

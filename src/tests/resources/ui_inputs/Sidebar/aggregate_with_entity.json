@@ -1,0 +1,19 @@
+[
+  {
+    "id": "Bounded context three",
+    "name": "Bounded context three",
+    "children": [
+      {
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateThree",
+        "name": "AggregateThree",
+        "children": [
+          {
+            "id" : "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityThree",
+            "name" : "EntityThree",
+            "children" : []
+          }
+        ]
+      }
+    ]
+  }
+]

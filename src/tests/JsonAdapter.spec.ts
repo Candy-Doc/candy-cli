@@ -63,7 +63,7 @@ describe('Json Adapter from plugin output to candy-board input', () => {
       },
       {
         name: 'Error',
-        message: 'PatternFormatter : This pattern is unknown.',
+        message: 'PatternFormatter : The pattern UNKNOWN_PATTERN is unknown.',
       },
     );
   });
