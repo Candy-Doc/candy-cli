@@ -7,6 +7,7 @@ import { IAdapter } from './Adapter';
 import { UbiquitousLanguageJson } from '../../model/UbiquitousLanguageJson';
 import { NOT_ALLOWED_DEPENDENCIES } from './ErrorCodes';
 import { CytoscapeNode } from '../../model/CytoscapeNode';
+import { SidebarTree } from '../../model/SidebarTree';
 
 export class CytoscapeAdapter implements IAdapter {
   private static NODE_DEPENDENCIES: [CytoscapePattern, CytoscapePattern][] = [
@@ -22,6 +23,7 @@ export class CytoscapeAdapter implements IAdapter {
   private edgeCounter = 0;
   private nodes: Array<CytoscapeNode>;
   private edges: Array<CytoscapeEdgeDto>;
+  private sidebarTree: SidebarTree;
   ubiquitousLanguageDtoArray: Array<UbiquitousLanguageDto>;
 
   constructor(ubiquitousLanguageJsonArray: Array<UbiquitousLanguageJson>) {
@@ -31,10 +33,15 @@ export class CytoscapeAdapter implements IAdapter {
     );
     this.nodes = new Array<CytoscapeNode>();
     this.edges = new Array<CytoscapeEdgeDto>();
+    this.sidebarTree = new SidebarTree();
   }
 
   public adapt() {
     return this.toCytoscapeDto().json();
+  }
+
+  public getSidebarTree() {
+    return this.sidebarTree.json();
   }
 
   private toCytoscapeDto(): CytoscapeDto {
@@ -86,6 +93,7 @@ export class CytoscapeAdapter implements IAdapter {
       PatternFormatter.toCytoscapeFormat(ubiquitousLanguageDto.type),
     );
     this.nodes.push(boundedContextNode);
+    this.sidebarTree.addRoot(boundedContextNode);
   }
 
   private addDomainModelsElements(ubiquitousLanguageDto: UbiquitousLanguageDto) {
@@ -130,6 +138,7 @@ export class CytoscapeAdapter implements IAdapter {
 
   private createCytoscapeDto(): CytoscapeDto {
     const nodesDto = this.nodes.map((cytoscapeNode: CytoscapeNode) => cytoscapeNode.toDto(this));
+    this.sidebarTree.createTree(nodesDto);
     return new CytoscapeDto([...nodesDto, ...this.edges]);
   }
 }

@@ -10,6 +10,9 @@ export class CytoscapeNode {
   get id(): string {
     return this._id;
   }
+  get label(): string {
+    return this._label;
+  }
 
   private readonly _id: string;
   private readonly _label: string;
