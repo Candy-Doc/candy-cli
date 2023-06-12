@@ -1,13 +1,11 @@
 import { UbiquitousLanguageJson } from '../UbiquitousLanguageJson';
 import { DomainModelDto } from './DomainModelDto';
 import { UbiquitousLanguagePattern } from '../../tools/adapter/UbiquitousLanguagePattern';
-import { DomainModelJson } from '../DomainModelJson';
 
 export class UbiquitousLanguageDto {
   private readonly _type: UbiquitousLanguagePattern;
   private readonly _name: string;
   private readonly _description: string;
-  // private readonly _domainModels: Map<string, DomainModelDto>;
   private readonly _domainModels: Record<string, DomainModelDto>;
 
   constructor(ubiquitousLanguage: UbiquitousLanguageJson) {
