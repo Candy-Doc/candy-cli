@@ -20,8 +20,8 @@ export class CytoscapeAdapter implements IAdapter {
   ];
 
   private edgeCounter = 0;
-  private nodes: Array<CytoscapeNode>;
-  private edges: Array<CytoscapeEdgeDto>;
+  private readonly nodes: Array<CytoscapeNode>;
+  private readonly edges: Array<CytoscapeEdgeDto>;
 
   constructor() {
     this.nodes = new Array<CytoscapeNode>();
