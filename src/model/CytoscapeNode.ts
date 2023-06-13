@@ -1,6 +1,7 @@
 import { CytoscapePattern } from '../tools/adapter/CytoscapePattern';
 import { CytoscapeNodeDto } from './DTO/CytoscapeNodeDto';
 import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
+import { SidebarTreeNode } from './SidebarTreeNode';
 
 export class CytoscapeNode {
   get classes(): CytoscapePattern {
@@ -47,6 +48,10 @@ export class CytoscapeNode {
         errors: this._errors.length > 0 ? this._errors : undefined,
       },
     };
+  }
+
+  public toSidebarTreeNode(): SidebarTreeNode {
+    return new SidebarTreeNode(this._id, this._label);
   }
 
   private adaptToEdgeDependencies(adapter: CytoscapeAdapter): string {

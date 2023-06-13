@@ -29,8 +29,9 @@ const EVENT_AND_COMMAND_POINTING_ON_A_VALUE_OBJECT =
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
   const jsonFile = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const adaptedJson = new CytoscapeAdapter(Array.of(jsonFile)).adapt();
-  return JSON.parse(adaptedJson);
+  const adapter = new CytoscapeAdapter(Array.of(jsonFile));
+  adapter.adapt();
+  return JSON.parse(adapter.getCytoscapeJson());
 };
 
 describe('Json Adapter from plugin output to candy-board input', () => {
@@ -59,7 +60,8 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     const jsonWithUnknownPattern = JSON.parse(fs.readFileSync(jsonWithUnknownPatternPath, 'utf-8'));
     assert.throws(
       () => {
-        const modifiedJson = new CytoscapeAdapter(Array.of(jsonWithUnknownPattern)).adapt();
+        const adapter = new CytoscapeAdapter(Array.of(jsonWithUnknownPattern));
+        adapter.adapt();
       },
       {
         name: 'Error',

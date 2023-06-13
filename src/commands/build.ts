@@ -53,11 +53,14 @@ class Build extends Command {
       const manifest = new Manifest(manifestFile, this.pluginOutputDirectory);
       console.log('candy-doc : Parsing OK');
       console.log('candy-doc : Adapting the output ...');
-      const JsonForCytoscape = manifest.toCytoscape();
+      manifest.adapt();
       console.log('candy-doc : Adapting OK');
       console.log('candy-doc : Writing the new cytoscape input ...');
-      await outputFile(`${finalDir}/candy-data.json`, JSON.stringify(JsonForCytoscape));
+      await outputFile(`${finalDir}/candy-data.json`, JSON.stringify(manifest.getCytoscapeJson()));
       console.log('candy-doc : Writing OK');
+      console.log('candy-doc : Collecting sidebar information ...');
+      await outputFile(`${finalDir}/sidebar-tree.json`, JSON.stringify(manifest.getSidebarTree()));
+      console.log('candy-doc : Collecting OK');
       console.log('candy-doc : Downloading candy-build ...');
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);

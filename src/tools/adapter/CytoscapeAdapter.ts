@@ -25,6 +25,7 @@ export class CytoscapeAdapter implements IAdapter {
   private edges: Array<CytoscapeEdgeDto>;
   private sidebarTree: SidebarTree;
   ubiquitousLanguageDtoArray: Array<UbiquitousLanguageDto>;
+  private cytoscapeDto: CytoscapeDto | undefined;
 
   constructor(ubiquitousLanguageJsonArray: Array<UbiquitousLanguageJson>) {
     this.ubiquitousLanguageDtoArray = ubiquitousLanguageJsonArray.map(
@@ -36,8 +37,12 @@ export class CytoscapeAdapter implements IAdapter {
     this.sidebarTree = new SidebarTree();
   }
 
-  public adapt() {
-    return this.toCytoscapeDto().json();
+  public adapt(): void {
+    this.cytoscapeDto = this.toCytoscapeDto();
+  }
+
+  public getCytoscapeJson() {
+    return this.cytoscapeDto.json();
   }
 
   public getSidebarTree() {

@@ -1,8 +1,8 @@
 import { SidebarTreeNodeDto } from './DTO/SidebarTreeNodeDto';
 
 export class SidebarTreeNode {
-  private _id: string;
-  private _name: string;
+  private readonly _id: string;
+  private readonly _name: string;
   private _children: Array<SidebarTreeNode> = new Array<SidebarTreeNode>();
 
   get id(): string {
@@ -24,16 +24,6 @@ export class SidebarTreeNode {
 
   public addChild(child: SidebarTreeNode) {
     this._children.push(child);
-  }
-
-  public findNode(nodeId: string): SidebarTreeNode | undefined {
-    if (nodeId === this._id) return this;
-
-    for (const child of this._children) {
-      const foundNode = child.findNode(nodeId);
-      if (foundNode) return foundNode;
-    }
-    return undefined;
   }
 
   public toDto(): SidebarTreeNodeDto {

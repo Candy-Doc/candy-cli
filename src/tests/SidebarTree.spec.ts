@@ -30,8 +30,7 @@ const buildActualJsonForSidebarFrom = (fileName: string) => {
   const jsonFile = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   const cyAdapter = new CytoscapeAdapter(Array.of(jsonFile));
   cyAdapter.adapt();
-  const sidebar = cyAdapter.getSidebarTree();
-  return JSON.parse(sidebar);
+  return JSON.parse(cyAdapter.getSidebarTree());
 };
 
 describe('Json Adapter to collect concepts for the sidebar', () => {
@@ -60,7 +59,8 @@ describe('Json Adapter to collect concepts for the sidebar', () => {
     const jsonWithUnknownPattern = JSON.parse(fs.readFileSync(jsonWithUnknownPatternPath, 'utf-8'));
     assert.throws(
       () => {
-        const modifiedJson = new CytoscapeAdapter(Array.of(jsonWithUnknownPattern)).adapt();
+        const adapter = new CytoscapeAdapter(Array.of(jsonWithUnknownPattern));
+        adapter.adapt();
       },
       {
         name: 'Error',

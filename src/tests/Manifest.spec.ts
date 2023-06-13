@@ -16,7 +16,8 @@ const buildActualJsonForCytoscapeFrom = (dirName: string) => {
   const filePath = path.join(OUTPUTS_DIR_MANIFEST, dirName + '/MANIFEST.json');
   const manifestJson: ManifestJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   const manifest = new Manifest(manifestJson, path.join(OUTPUTS_DIR_MANIFEST, dirName));
-  return manifest.toCytoscape();
+  manifest.adapt();
+  return manifest.getCytoscapeJson();
 };
 const getExpectedJsonFrom = (fileName: string) => {
   const filePath = path.join(INPUTS_DIR, fileName + '.json');

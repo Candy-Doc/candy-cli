@@ -3,21 +3,31 @@ import fs from 'fs';
 import path from 'path';
 import { UbiquitousLanguageJson } from './UbiquitousLanguageJson';
 import { ManifestJson } from './ManifestJson';
+import { IAdapter } from '../tools/adapter/Adapter';
 
 export class Manifest {
   private outputDir: string;
   private ubiquitousLanguageJsonArray: Array<UbiquitousLanguageJson>;
+  private adapter: CytoscapeAdapter;
 
   constructor(manifestJson: ManifestJson, outputDir: string) {
     this.outputDir = outputDir;
     this.ubiquitousLanguageJsonArray = manifestJson.files.map((filePath) =>
       this.getJsonFromPath(filePath, outputDir),
     );
+    this.adapter = new CytoscapeAdapter(this.ubiquitousLanguageJsonArray);
   }
 
-  public toCytoscape(): JSON {
-    const adaptedJson = new CytoscapeAdapter(this.ubiquitousLanguageJsonArray).adapt();
-    return JSON.parse(adaptedJson);
+  public adapt() {
+    this.adapter.adapt();
+  }
+
+  public getCytoscapeJson(): JSON {
+    return JSON.parse(this.adapter.getCytoscapeJson());
+  }
+
+  public getSidebarTree(): JSON {
+    return JSON.parse(this.adapter.getSidebarTree());
   }
 
   private getJsonFromPath(filePath: string, outputDir: string): UbiquitousLanguageJson {
