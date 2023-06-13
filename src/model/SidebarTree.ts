@@ -52,11 +52,13 @@ export class SidebarTree {
     if (parentNode) parentNode.addChild(this.convertToSidebarTreeNode(childNode));
   }
 
-  private getParentNodeIfAny(
+  private getParentNodesIfAny(
     unconnectedNode: CytoscapeNodeDto,
     connectedNodes: Array<SidebarTreeNode>,
   ) {
-    return connectedNodes.find((connectedNode) => unconnectedNode.data.parent === connectedNode.id);
+    return connectedNodes.filter(
+      (connectedNode) => unconnectedNode.data.parent === connectedNode.id,
+    );
   }
 
   private moveNodeToConnectedNodes(
@@ -86,10 +88,10 @@ export class SidebarTree {
     while (aNodeGetConnected) {
       aNodeGetConnected = false;
       unconnectedNodes.forEach((unconnectedNode, unconnectedNodeIndex) => {
-        const parentNode = this.getParentNodeIfAny(unconnectedNode, connectedNodes);
-        if (parentNode) {
+        const parentNodes = this.getParentNodesIfAny(unconnectedNode, connectedNodes);
+        if (parentNodes.length > 0) {
           const nodeToConnect = this.convertDtoToSidebarTreeNode(unconnectedNode);
-          parentNode.addChild(nodeToConnect);
+          parentNodes.forEach((parentNodes) => parentNodes.addChild(nodeToConnect));
           this.moveNodeToConnectedNodes(
             nodeToConnect,
             connectedNodes,

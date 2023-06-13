@@ -20,6 +20,7 @@ const AGGREGATE_WITH_ENTITY = 'aggregate_with_entity.json';
 const SIMPLE_BOUNDED_CONTEXT = 'simple_bounded_context.json';
 const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
 const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
+const ENTITY_WITH_TWO_PARENTS_AND_CHILDREN = 'entity_with_two_parents_and_children.json';
 // const EVENT_POINTING_ON_A_VALUE_OBJECT = 'event_pointing_on_a_value_object.json';
 // const EVENT_AND_COMMAND_POINTING_ON_A_VALUE_OBJECT =
 //   'event_and_command_pointing_on_a_value_object.json';
@@ -67,9 +68,14 @@ describe('Json Adapter to collect concepts for the sidebar', () => {
       },
     );
   });
-  it('creates edges for an entity/value object shared by 2 parents', () => {
+  it('duplicates shared nodes into each parents', () => {
     const modifiedJson = buildActualJsonForSidebarFrom(ENTITY_WITH_TWO_PARENTS);
 
     assert.deepStrictEqual(modifiedJson, entityWithTwoParents);
+  });
+  it('duplicates shared nodes and their children', () => {
+    const modifiedJson = buildActualJsonForSidebarFrom(ENTITY_WITH_TWO_PARENTS_AND_CHILDREN);
+
+    assert.deepStrictEqual(modifiedJson, entityWithTwoParentsAndChildren);
   });
 });
