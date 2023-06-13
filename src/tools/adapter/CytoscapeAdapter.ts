@@ -44,6 +44,10 @@ export class CytoscapeAdapter implements IAdapter {
     return this.sidebarTree.json();
   }
 
+  public addSharedNodes(id: string, label: string, classes: CytoscapePattern, parentIds: string[]) {
+    this.sidebarTree.addSharedNodes(id, label, classes, parentIds);
+  }
+
   private toCytoscapeDto(): CytoscapeDto {
     this.ubiquitousLanguageDtoArray.forEach((ubiquitousLanguageDto: UbiquitousLanguageDto) => {
       this.addBoundedContext(ubiquitousLanguageDto);

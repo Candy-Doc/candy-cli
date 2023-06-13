@@ -54,6 +54,7 @@ export class CytoscapeNode {
     nodeDependencies.forEach((parentId: string) => {
       adapter.addEdge(parentId, this._id);
     });
+    adapter.addSharedNodes(this._id, this._label, this._classes, nodeDependencies);
     return this._parents[0];
   }
 }

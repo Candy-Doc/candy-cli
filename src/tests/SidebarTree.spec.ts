@@ -9,6 +9,7 @@ import aggregateWithEdges from './resources/ui_inputs/Sidebar/aggregate_with_edg
 import aggregateWithEntity from './resources/ui_inputs/Sidebar/aggregate_with_entity.json';
 import simpleBoundedContext from './resources/ui_inputs/Sidebar/simple_bounded_context.json';
 import entityWithTwoParents from './resources/ui_inputs/Sidebar/entity_with_two_parents.json';
+import entityWithTwoParentsAndChildren from './resources/ui_inputs/Sidebar/entity_with_two_parents_and_children.json';
 // import eventPointingOnAValueObject from './resources/ui_inputs/event_pointing_on_a_value_object.json';
 // import eventAndCommandPointingOnAValuueObject from './resources/ui_inputs/event_and_command_pointing_on_a_value_object.json';
 

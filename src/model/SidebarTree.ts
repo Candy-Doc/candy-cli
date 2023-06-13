@@ -3,19 +3,40 @@ import { CytoscapeNode } from './CytoscapeNode';
 import { CytoscapePattern } from '../tools/adapter/CytoscapePattern';
 import { CytoscapeNodeDto } from './DTO/CytoscapeNodeDto';
 import { SidebarTreeNodeDto } from './DTO/SidebarTreeNodeDto';
+import { CytoscapeEdgeDto } from './DTO/CytoscapeEdgeDto';
 
 export class SidebarTree {
   private roots: Array<SidebarTreeNode> = new Array<SidebarTreeNode>();
+  private sharedNodes: Array<CytoscapeNodeDto> = new Array<CytoscapeNodeDto>();
 
   private convertToSidebarTreeNode(cytoscapeNode: CytoscapeNode) {
     return new SidebarTreeNode(cytoscapeNode.id, cytoscapeNode.label);
   }
+
   private convertDtoToSidebarTreeNode(cytoscapeNodeDto: CytoscapeNodeDto) {
     return new SidebarTreeNode(cytoscapeNodeDto.data.id, cytoscapeNodeDto.data.label);
   }
 
   public addRoot(cytoscapeNode: CytoscapeNode) {
     this.roots.push(this.convertToSidebarTreeNode(cytoscapeNode));
+  }
+
+  public addSharedNodes(id: string, label: string, classes: CytoscapePattern, parentIds: string[]) {
+    parentIds
+      .map((parentId) => {
+        const sharedNode: CytoscapeNodeDto = {
+          data: {
+            id: id,
+            label: label,
+            parent: parentId,
+          },
+          classes: classes,
+        };
+        return sharedNode;
+      })
+      .forEach((sharedNode) => {
+        this.sharedNodes.push(sharedNode);
+      });
   }
 
   public findNode(nodeId: string): SidebarTreeNode | undefined {
@@ -48,11 +69,18 @@ export class SidebarTree {
     unconnectedNodes.splice(unconnectedNodeIndex, 1);
   }
 
-  createTree(nodes: CytoscapeNodeDto[]) {
+  public createTree(nodes: CytoscapeNodeDto[]) {
     const connectedNodes = [...this.roots];
     const unconnectedNodes = nodes.filter(
       (node) => node.classes != CytoscapePattern.BOUNDED_CONTEXT,
     );
+    this.sharedNodes.forEach((sharedNode) => {
+      const sharedNodeIndex = unconnectedNodes
+        .map((cytoscapeNodeDto) => cytoscapeNodeDto.data.id)
+        .indexOf(sharedNode.data.id);
+      if (sharedNodeIndex !== -1) unconnectedNodes.splice(sharedNodeIndex, 1);
+    });
+    unconnectedNodes.push(...this.sharedNodes);
 
     let aNodeGetConnected = true;
     while (aNodeGetConnected) {

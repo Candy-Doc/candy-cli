@@ -6,17 +6,24 @@
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
         "name": "AggregateOne",
-        "children": []
-      },
-      {
-        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
-        "name": "EntityOne",
-        "children": []
+        "children": [
+          {
+            "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+            "name": "EntityOne",
+            "children": []
+          }
+        ]
       },
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateTwo",
         "name": "AggregateTwo",
-        "children": []
+        "children": [
+          {
+            "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+            "name": "EntityOne",
+            "children": []
+          }
+        ]
       }
     ]
   }
