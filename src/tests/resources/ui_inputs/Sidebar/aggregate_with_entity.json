@@ -2,14 +2,17 @@
   {
     "id": "Bounded context three",
     "name": "Bounded context three",
+    "classes": "boundedContext",
     "children": [
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateThree",
         "name": "AggregateThree",
+        "classes": "aggregate",
         "children": [
           {
             "id" : "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityThree",
             "name" : "EntityThree",
+            "classes": "entity",
             "children" : []
           }
         ]

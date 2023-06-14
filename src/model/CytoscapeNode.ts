@@ -51,7 +51,7 @@ export class CytoscapeNode {
   }
 
   public toSidebarTreeNode(): SidebarTreeNode {
-    return new SidebarTreeNode(this._id, this._label);
+    return new SidebarTreeNode(this._id, this._label, this._classes);
   }
 
   private adaptToEdgeDependencies(adapter: CytoscapeAdapter): string {

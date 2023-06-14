@@ -48,7 +48,7 @@
       ]
     },
     "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne": {
-      "type": "DOMAIN_ENTITY",
+      "type": "VALUE_OBJECT",
       "simpleName": "ValueObjectOne",
       "description": "",
       "dependencies": []

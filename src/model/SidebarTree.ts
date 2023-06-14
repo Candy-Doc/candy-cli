@@ -92,7 +92,11 @@ export class SidebarTree {
   }
 
   private convertDtoToSidebarTreeNode(cytoscapeNodeDto: CytoscapeNodeDto) {
-    return new SidebarTreeNode(cytoscapeNodeDto.data.id, cytoscapeNodeDto.data.label);
+    return new SidebarTreeNode(
+      cytoscapeNodeDto.data.id,
+      cytoscapeNodeDto.data.label,
+      cytoscapeNodeDto.classes,
+    );
   }
 
   private buildTreeLevelbyLevel(

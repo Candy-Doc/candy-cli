@@ -42,7 +42,7 @@ export class CytoscapeAdapter implements IAdapter {
   }
 
   public getCytoscapeJson() {
-    return this.cytoscapeDto.json();
+    return this.cytoscapeDto!.json();
   }
 
   public getSidebarTree() {

@@ -2,23 +2,28 @@
   {
     "id": "Bounded context two",
     "name": "Bounded context two",
+    "classes": "boundedContext",
     "children": [
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
         "name": "AggregateOne",
+        "classes": "aggregate",
         "children": [
           {
             "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne",
             "name": "ValueObjectOne",
+            "classes": "valueObject",
             "children": []
           },
           {
             "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
             "name": "EntityOne",
+            "classes": "entity",
             "children": [
               {
                 "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectTwo",
                 "name": "ValueObjectTwo",
+                "classes": "valueObject",
                 "children": []
               }
             ]
@@ -28,11 +33,13 @@
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
         "name": "DomainEventOne",
+        "classes": "event",
         "children": []
       },
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
         "name": "DomainCommandOne",
+        "classes": "command",
         "children": []
       }
     ]

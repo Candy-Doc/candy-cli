@@ -2,10 +2,12 @@
   {
     "id" : "Bounded context one",
     "name" : "Bounded context one",
+    "classes": "boundedContext",
     "children" : [
       {
         "id" : "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
         "name" : "AggregateOne",
+        "classes": "aggregate",
         "children": []
       }
     ]

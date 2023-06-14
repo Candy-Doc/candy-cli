@@ -2,22 +2,27 @@
   {
     "id": "Bounded context one",
     "name": "Bounded context one",
+    "classes": "boundedContext",
     "children": [
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
         "name": "AggregateOne",
+        "classes": "aggregate",
         "children": [
           {
             "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
             "name": "EntityOne",
+            "classes": "entity",
             "children": [
               {
                 "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityChild",
                 "name": "EntityChild",
+                "classes": "entity",
                 "children": [
                   {
                     "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne",
                     "name": "ValueObjectOne",
+                    "classes": "valueObject",
                     "children": []
                   }
                 ]
@@ -29,18 +34,22 @@
       {
         "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateTwo",
         "name": "AggregateTwo",
+        "classes": "aggregate",
         "children": [
           {
             "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
             "name": "EntityOne",
+            "classes": "entity",
             "children": [
               {
                 "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityChild",
                 "name": "EntityChild",
+                "classes": "entity",
                 "children": [
                   {
                     "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne",
                     "name": "ValueObjectOne",
+                    "classes": "valueObject",
                     "children": []
                   }
                 ]
