@@ -8,11 +8,16 @@ export class SidebarTree {
   private roots: Array<SidebarTreeNode> = new Array<SidebarTreeNode>();
   private sharedNodes: Array<CytoscapeNodeDto> = new Array<CytoscapeNodeDto>();
 
+  private static isATacticalNode(node: CytoscapeNodeDto): boolean {
+    return !(
+      node.classes === CytoscapePattern.BOUNDED_CONTEXT ||
+      node.classes === CytoscapePattern.ORPHAN_VOCABULARY
+    );
+  }
+
   public createTree(nodes: CytoscapeNodeDto[]) {
     const connectedNodes = [...this.roots];
-    const unconnectedNodes = nodes.filter(
-      (node) => node.classes != CytoscapePattern.BOUNDED_CONTEXT,
-    );
+    const unconnectedNodes = nodes.filter(SidebarTree.isATacticalNode);
     this.duplicateSharedNodes(unconnectedNodes);
     this.buildTreeLevelbyLevel(unconnectedNodes, connectedNodes);
   }
