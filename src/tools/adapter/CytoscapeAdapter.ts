@@ -55,7 +55,7 @@ export class CytoscapeAdapter implements IAdapter {
 
   private toCytoscapeDto(): CytoscapeDto {
     this.ubiquitousLanguageDtoArray.forEach((ubiquitousLanguageDto: UbiquitousLanguageDto) => {
-      this.addBoundedContext(ubiquitousLanguageDto);
+      this.addStrategicPattern(ubiquitousLanguageDto);
       this.addDomainModelsElements(ubiquitousLanguageDto);
     });
 
@@ -95,14 +95,14 @@ export class CytoscapeAdapter implements IAdapter {
         nodeDependency[0] === parentNodePatttern && nodeDependency[1] === dependencyNodePatttern,
     );
 
-  private addBoundedContext(ubiquitousLanguageDto: UbiquitousLanguageDto) {
-    const boundedContextNode: CytoscapeNode = new CytoscapeNode(
+  private addStrategicPattern(ubiquitousLanguageDto: UbiquitousLanguageDto) {
+    const strategicPattern: CytoscapeNode = new CytoscapeNode(
       ubiquitousLanguageDto.name,
       ubiquitousLanguageDto.name,
       PatternFormatter.toCytoscapeFormat(ubiquitousLanguageDto.type),
     );
-    this.nodes.push(boundedContextNode);
-    this.sidebarTree.addRoot(boundedContextNode);
+    this.nodes.push(strategicPattern);
+    this.sidebarTree.addRoot(strategicPattern);
   }
 
   private addDomainModelsElements(ubiquitousLanguageDto: UbiquitousLanguageDto) {

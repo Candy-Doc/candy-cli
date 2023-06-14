@@ -1,0 +1,63 @@
+[
+  {
+    "classes": "orphanVocabulary",
+    "data": {
+      "id": "Orphan vocabulary",
+      "label": "Orphan vocabulary"
+    }
+  },
+  {
+    "classes": "command",
+    "data": {
+      "errors": [
+        "!DEP"
+      ],
+      "id": "io.candydoc.ddd.sample.orphan.OrphanDomainCommandOne",
+      "label": "OrphanDomainCommandOne",
+      "parent": "Orphan vocabulary"
+    }
+  },
+  {
+    "classes": "event",
+    "data": {
+      "errors": [
+        "!DEP",
+        "!DEP"
+      ],
+      "id": "io.candydoc.ddd.sample.orphan.OrphanDomainEventOne",
+      "label": "OrphanDomainEventOne",
+      "parent": "Orphan vocabulary"
+    }
+  },
+  {
+    "classes": "valueObject",
+    "data": {
+      "errors": [
+        "!DEP"
+      ],
+      "id": "io.candydoc.ddd.sample.orphan.OrphanValueObjectOne",
+      "label": "OrphanValueObjectOne",
+      "parent": "Orphan vocabulary"
+    }
+  },
+  {
+    "data": {
+      "errors": [
+        "!DEP"
+      ],
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.orphan.OrphanDomainEventOne",
+      "target": "io.candydoc.ddd.sample.orphan.OrphanDomainCommandOne"
+    }
+  },
+  {
+    "data": {
+      "errors": [
+        "!DEP"
+      ],
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.orphan.OrphanValueObjectOne",
+      "target": "io.candydoc.ddd.sample.orphan.OrphanDomainEventOne"
+    }
+  }
+]

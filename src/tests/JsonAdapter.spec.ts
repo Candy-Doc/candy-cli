@@ -12,6 +12,7 @@ import ubiquitousLanguageWithNotAllowedDependencies from './resources/ui_inputs/
 import entityWithTwoParents from './resources/ui_inputs/entity_with_two_parents.json';
 import eventPointingOnAValueObject from './resources/ui_inputs/event_pointing_on_a_value_object.json';
 import eventAndCommandPointingOnAValuueObject from './resources/ui_inputs/event_and_command_pointing_on_a_value_object.json';
+import orphanVocabulary from './resources/ui_inputs/orphan_vocabulary.json';
 
 const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs';
 const ALONE_AGGREGATE = 'alone_aggregate.json';
@@ -25,6 +26,7 @@ const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
 const EVENT_POINTING_ON_A_VALUE_OBJECT = 'event_pointing_on_a_value_object.json';
 const EVENT_AND_COMMAND_POINTING_ON_A_VALUE_OBJECT =
   'event_and_command_pointing_on_a_value_object.json';
+const ORPHAN_VOCABULARY = 'orphan_vocabulary.json';
 
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
@@ -92,5 +94,10 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     );
 
     assert.deepStrictEqual(modifiedJson, eventAndCommandPointingOnAValuueObject);
+  });
+  it('creates orphan vocabulary out of any bounded context', () => {
+    const modifiedJson = buildActualJsonForCytoscapeFrom(ORPHAN_VOCABULARY);
+
+    assert.deepStrictEqual(modifiedJson, orphanVocabulary);
   });
 });
