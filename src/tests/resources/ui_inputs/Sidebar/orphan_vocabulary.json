@@ -1,0 +1,27 @@
+[
+  {
+    "children": [
+      {
+        "children": [],
+        "classes": "command",
+        "id": "io.candydoc.ddd.sample.orphan.OrphanDomainCommandOne",
+        "name": "OrphanDomainCommandOne"
+      },
+      {
+        "children": [],
+        "classes": "valueObject",
+        "id": "io.candydoc.ddd.sample.orphan.OrphanValueObjectOne",
+        "name": "OrphanValueObjectOne"
+      },
+      {
+        "children": [],
+        "classes": "event",
+        "id": "io.candydoc.ddd.sample.orphan.OrphanDomainEventOne",
+        "name": "OrphanDomainEventOne"
+      }
+    ],
+    "classes": "orphanVocabulary",
+    "id": "Orphan vocabulary",
+    "name": "Orphan vocabulary"
+  }
+]
