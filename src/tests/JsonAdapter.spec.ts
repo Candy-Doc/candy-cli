@@ -81,7 +81,6 @@ describe('Json Adapter from plugin output to candy-board input', () => {
 
     assert.deepStrictEqual(modifiedJson, entityWithTwoParents);
   });
-  //TODO: Voir avec des tests ou le VO n'appartient pas à un aggrégat
   it('creates edges for an entity/value object shared by 2 parents if one of them is not an aggregate/entity or VO', () => {
     const modifiedJson = buildActualJsonForCytoscapeFrom(EVENT_POINTING_ON_A_VALUE_OBJECT);
 
