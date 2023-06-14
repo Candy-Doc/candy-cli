@@ -1,0 +1,24 @@
+{
+  "type": "BOUNDED_CONTEXT",
+  "name": "Bounded context three",
+  "description": "Describe the bounded context here",
+  "domainModels": {
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateThree": {
+      "type": "AGGREGATE",
+      "simpleName": "AggregateThree",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityThree",
+          "allowed": true
+        }
+      ]
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityThree": {
+      "type": "DOMAIN_ENTITY",
+      "simpleName": "EntityThree",
+      "description": "",
+      "dependencies": []
+    }
+  }
+}

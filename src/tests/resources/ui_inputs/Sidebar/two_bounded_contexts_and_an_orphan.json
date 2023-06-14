@@ -1,0 +1,60 @@
+[
+  {
+    "children": [
+      {
+        "children": [],
+        "classes": "aggregate",
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+        "name": "AggregateOne"
+      }
+    ],
+    "classes": "boundedContext",
+    "id": "Bounded context one",
+    "name": "Bounded context one"
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [],
+            "classes": "entity",
+            "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityThree",
+            "name": "EntityThree"
+          }
+        ],
+        "classes": "aggregate",
+        "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateThree",
+        "name": "AggregateThree"
+      }
+    ],
+    "classes": "boundedContext",
+    "id": "Bounded context three",
+    "name": "Bounded context three"
+  },
+  {
+    "children": [
+      {
+        "children": [],
+        "classes": "command",
+        "id": "io.candydoc.ddd.sample.orphan.OrphanDomainCommandOne",
+        "name": "OrphanDomainCommandOne"
+      },
+      {
+        "children": [],
+        "classes": "valueObject",
+        "id": "io.candydoc.ddd.sample.orphan.OrphanValueObjectOne",
+        "name": "OrphanValueObjectOne"
+      },
+      {
+        "children": [],
+        "classes": "event",
+        "id": "io.candydoc.ddd.sample.orphan.OrphanDomainEventOne",
+        "name": "OrphanDomainEventOne"
+      }
+    ],
+    "classes": "orphanVocabulary",
+    "id": "Orphan vocabulary",
+    "name": "Orphan vocabulary"
+  }
+]
