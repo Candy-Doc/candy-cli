@@ -1,0 +1,69 @@
+[
+  {
+    "classes": "boundedContext",
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
+    }
+  },
+  {
+    "classes": "aggregate",
+    "data": {
+      "id": "io.candydoc.ddd.sample.bounded_context_one.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "Bounded context one"
+    }
+  },
+  {
+    "classes": "boundedContext",
+    "data": {
+      "id": "Bounded context two",
+      "label": "Bounded context two"
+    }
+  },
+  {
+    "classes": "aggregate",
+    "data": {
+      "id": "io.candydoc.ddd.sample.bounded_context_two.feature_A.AggregateTwo",
+      "label": "AggregateTwo",
+      "parent": "Bounded context two"
+    }
+  },
+  {
+    "classes": "sharedKernel",
+    "data": {
+      "id": "Shared kernel one",
+      "label": "Shared kernel one"
+    }
+  },
+  {
+    "classes": "valueObject",
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_A.SharedValueObjectOne",
+      "label": "SharedValueObjectOne",
+      "parent": "Shared kernel one"
+    }
+  },
+  {
+    "classes": "valueObject",
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_B.SharedValueObjectTwo",
+      "label": "SharedValueObjectTwo",
+      "parent": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_A.SharedValueObjectOne"
+    }
+  },
+  {
+    "data": {
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.bounded_context_one.feature_A.AggregateOne",
+      "target": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_A.SharedValueObjectOne"
+    }
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.bounded_context_two.feature_A.AggregateTwo",
+      "target": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_A.SharedValueObjectOne"
+    }
+  }
+]

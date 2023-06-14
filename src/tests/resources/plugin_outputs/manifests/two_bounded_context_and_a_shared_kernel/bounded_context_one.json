@@ -1,0 +1,18 @@
+{
+  "type": "BOUNDED_CONTEXT",
+  "name": "Bounded context one",
+  "description": "Describe the bounded context here",
+  "domainModels": {
+    "io.candydoc.ddd.sample.bounded_context_one.feature_A.AggregateOne": {
+      "type": "AGGREGATE",
+      "simpleName": "AggregateOne",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_A.SharedValueObjectOne",
+          "allowed": true
+        }
+      ]
+    }
+  }
+}

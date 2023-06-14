@@ -73,6 +73,7 @@ export class CytoscapeAdapter implements IAdapter {
 
   private getNode(nodeId: string): CytoscapeNode | undefined {
     const nodeIndex = this.nodes.findIndex((cytoscapeNode) => cytoscapeNode.id === nodeId);
+    //TODO: Ajouter erreur si jamais
     return this.nodes.at(nodeIndex);
   }
 

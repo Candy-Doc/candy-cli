@@ -1,5 +1,6 @@
 export enum CytoscapePattern {
   BOUNDED_CONTEXT = 'boundedContext',
+  SHARED_KERNEL = 'sharedKernel',
   ORPHAN_VOCABULARY = 'orphanVocabulary',
   AGGREGATE = 'aggregate',
   DOMAIN_ENTITY = 'entity',

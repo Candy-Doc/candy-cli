@@ -1,0 +1,7 @@
+{
+  "files": [
+    "/bounded_context_one.json",
+    "/bounded_context_two.json",
+    "/shared_kernel_one.json"
+  ]
+}

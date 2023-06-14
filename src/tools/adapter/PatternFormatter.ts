@@ -4,6 +4,7 @@ import { UbiquitousLanguagePattern } from './UbiquitousLanguagePattern';
 export class PatternFormatter {
   private static TO_CYTOSCAPE_PATTERN = new Map<UbiquitousLanguagePattern, CytoscapePattern>([
     [UbiquitousLanguagePattern.BOUNDED_CONTEXT, CytoscapePattern.BOUNDED_CONTEXT],
+    [UbiquitousLanguagePattern.SHARED_KERNEL, CytoscapePattern.SHARED_KERNEL],
     [UbiquitousLanguagePattern.ORPHAN_VOCABULARY, CytoscapePattern.ORPHAN_VOCABULARY],
     [UbiquitousLanguagePattern.AGGREGATE, CytoscapePattern.AGGREGATE],
     [UbiquitousLanguagePattern.DOMAIN_ENTITY, CytoscapePattern.DOMAIN_ENTITY],

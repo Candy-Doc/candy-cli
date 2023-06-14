@@ -11,6 +11,7 @@ const TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS = 'two_bounded_contexts_without_
 const TWO_BOUNDED_CONTEXTS_WITH_INTERACTIONS = 'two_bounded_contexts_with_interaction';
 const NO_SUCH_FILE = 'no_such_file';
 const ALONE_AGGREGATE = 'alone_aggregate';
+const TWO_BOUNDED_CONTEXTS_AND_A_SHARED_KERNEL = 'two_bounded_context_and_a_shared_kernel';
 
 const buildActualJsonForCytoscapeFrom = (dirName: string) => {
   const filePath = path.join(OUTPUTS_DIR_MANIFEST, dirName + '/MANIFEST.json');
@@ -39,6 +40,12 @@ describe('Creation of an unique file from all json files classified in the manif
   it('merges two simple bounded context without interaction', () => {
     const actualJson = buildActualJsonForCytoscapeFrom(TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS);
     const expectedJson = getExpectedJsonFrom(TWO_BOUNDED_CONTEXTS_WITHOUT_INTERACTIONS);
+
+    assert.deepStrictEqual(actualJson, expectedJson);
+  });
+  it('merges two simple bounded context with a shared kernel', () => {
+    const actualJson = buildActualJsonForCytoscapeFrom(TWO_BOUNDED_CONTEXTS_AND_A_SHARED_KERNEL);
+    const expectedJson = getExpectedJsonFrom(TWO_BOUNDED_CONTEXTS_AND_A_SHARED_KERNEL);
 
     assert.deepStrictEqual(actualJson, expectedJson);
   });
