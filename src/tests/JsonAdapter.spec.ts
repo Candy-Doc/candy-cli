@@ -25,6 +25,7 @@ const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
 const EVENT_POINTING_ON_A_VALUE_OBJECT = 'event_pointing_on_a_value_object.json';
 const EVENT_AND_COMMAND_POINTING_ON_A_VALUE_OBJECT =
   'event_and_command_pointing_on_a_value_object.json';
+const DEPENDENCIES_TO_NON_EXISTING_NODES = 'dependencies_to_non_existing_nodes.json';
 
 const buildActualJsonForCytoscapeFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
@@ -59,7 +60,7 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     const jsonWithUnknownPattern = JSON.parse(fs.readFileSync(jsonWithUnknownPatternPath, 'utf-8'));
     assert.throws(
       () => {
-        const modifiedJson = new CytoscapeAdapter().adapt(jsonWithUnknownPattern);
+        new CytoscapeAdapter().adapt(jsonWithUnknownPattern);
       },
       {
         name: 'Error',
@@ -79,7 +80,6 @@ describe('Json Adapter from plugin output to candy-board input', () => {
 
     assert.deepStrictEqual(modifiedJson, entityWithTwoParents);
   });
-  //TODO: Voir avec des tests ou le VO n'appartient pas à un aggrégat
   it('creates edges for an entity/value object shared by 2 parents if one of them is not an aggregate/entity or VO', () => {
     const modifiedJson = buildActualJsonForCytoscapeFrom(EVENT_POINTING_ON_A_VALUE_OBJECT);
 
@@ -91,5 +91,19 @@ describe('Json Adapter from plugin output to candy-board input', () => {
     );
 
     assert.deepStrictEqual(modifiedJson, eventAndCommandPointingOnAValuueObject);
+  });
+  it('throw an error if a node does not exist', () => {
+    const jsonWithUnknownNodesPath = path.join(OUTPUTS_DIR, DEPENDENCIES_TO_NON_EXISTING_NODES);
+    const jsonWithUnknownNodes = JSON.parse(fs.readFileSync(jsonWithUnknownNodesPath, 'utf-8'));
+    assert.throws(
+      () => {
+        new CytoscapeAdapter().adapt(jsonWithUnknownNodes);
+      },
+      {
+        name: 'Error',
+        message:
+          'CytoscapeAdapter: io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.WrongName does not exist.',
+      },
+    );
   });
 });

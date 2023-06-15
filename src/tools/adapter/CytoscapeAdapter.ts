@@ -47,6 +47,7 @@ export class CytoscapeAdapter implements IAdapter {
 
   private getNode(nodeId: string): CytoscapeNode | undefined {
     const nodeIndex = this.nodes.findIndex((cytoscapeNode) => cytoscapeNode.id === nodeId);
+    if (nodeIndex === -1) throw new Error('CytoscapeAdapter: ' + nodeId + ' does not exist.');
     return this.nodes.at(nodeIndex);
   }
 
