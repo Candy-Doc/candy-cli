@@ -73,7 +73,6 @@ export class CytoscapeAdapter implements IAdapter {
 
   private getNode(nodeId: string): CytoscapeNode | undefined {
     const nodeIndex = this.nodes.findIndex((cytoscapeNode) => cytoscapeNode.id === nodeId);
-    //TODO: Ajouter erreur si jamais
     return this.nodes.at(nodeIndex);
   }
 
@@ -87,14 +86,20 @@ export class CytoscapeAdapter implements IAdapter {
     });
   }
 
-  private isNodeDependency = (
-    parentNodePatttern: CytoscapePattern,
-    dependencyNodePatttern: CytoscapePattern,
-  ): boolean =>
+  private isNodeDependency = (parentNode: CytoscapeNode, dependencyNode: CytoscapeNode): boolean =>
+    this.isNodeRelation(parentNode, dependencyNode) &&
+    this.nodesAreFromSameContext(parentNode, dependencyNode);
+
+  private isNodeRelation = (parentNode: CytoscapeNode, dependencyNode: CytoscapeNode): boolean =>
     CytoscapeAdapter.NODE_DEPENDENCIES.some(
       (nodeDependency) =>
-        nodeDependency[0] === parentNodePatttern && nodeDependency[1] === dependencyNodePatttern,
+        nodeDependency[0] === parentNode.classes && nodeDependency[1] === dependencyNode.classes,
     );
+
+  private nodesAreFromSameContext = (
+    parentNode: CytoscapeNode,
+    dependencyNode: CytoscapeNode,
+  ): boolean => parentNode.getStrategicPattern() === dependencyNode.getStrategicPattern();
 
   private addStrategicPattern(ubiquitousLanguageDto: UbiquitousLanguageDto) {
     const strategicPattern: CytoscapeNode = new CytoscapeNode(
@@ -128,7 +133,7 @@ export class CytoscapeAdapter implements IAdapter {
             parentNode.addError(NOT_ALLOWED_DEPENDENCIES);
             dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES);
           }
-          if (this.isNodeDependency(parentNode.classes, dependencyNode.classes)) {
+          if (this.isNodeDependency(parentNode, dependencyNode)) {
             dependencyNode.addParent(domainModelId);
           } else {
             const domainModelEdge: CytoscapeEdgeDto = {

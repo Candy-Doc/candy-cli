@@ -14,6 +14,7 @@ import entityWithTwoParents from './resources/ui_inputs/Sidebar/entity_with_two_
 import entityWithTwoParentsAndChildren from './resources/ui_inputs/Sidebar/entity_with_two_parents_and_children.json';
 import orphanVocabulary from './resources/ui_inputs/Sidebar/orphan_vocabulary.json';
 import twoBoundedContextsAndAnOrphan from './resources/ui_inputs/Sidebar/two_bounded_contexts_and_an_orphan.json';
+import twoBoundedContextsAndASharedKernel from './resources/ui_inputs/Sidebar/two_bounded_contexts_and_a_shared_kernel.json';
 
 const OUTPUTS_DIR_MANIFEST = 'src/tests/resources/plugin_outputs/manifests';
 const OUTPUTS_DIR = 'src/tests/resources/plugin_outputs';
@@ -25,7 +26,10 @@ const JSON_WITH_UNKNOWN_PATTERN = 'json_with_unknown_pattern.json';
 const ENTITY_WITH_TWO_PARENTS = 'entity_with_two_parents.json';
 const ENTITY_WITH_TWO_PARENTS_AND_CHILDREN = 'entity_with_two_parents_and_children.json';
 const ORPHAN_VOCABULARY = 'orphan_vocabulary.json';
-const TWO_BOUNDED_CONTEXTS_AND_AN_ORPHAN = 'two_bounded_contexts_and_an_orphan';
+
+const TWO_BOUNDED_CONTEXTS_AND_AN_ORPHAN_MANIFEST = 'two_bounded_contexts_and_an_orphan';
+const TWO_BOUNDED_CONTEXTS_AND_A_SHARED_KERNEL_MANIFEST =
+  'two_bounded_contexts_and_a_shared_kernel';
 
 const buildActualJsonForSidebarFrom = (fileName: string) => {
   const filePath = path.join(OUTPUTS_DIR, fileName);
@@ -94,8 +98,17 @@ describe('Json Adapter to collect concepts for the sidebar', () => {
     assert.deepStrictEqual(modifiedJson, orphanVocabulary);
   });
   it('creates two bounded context and an orphan vocabulary', () => {
-    const modifiedJson = buildActualJsonForSidebarfromManifest(TWO_BOUNDED_CONTEXTS_AND_AN_ORPHAN);
+    const modifiedJson = buildActualJsonForSidebarfromManifest(
+      TWO_BOUNDED_CONTEXTS_AND_AN_ORPHAN_MANIFEST,
+    );
 
     assert.deepStrictEqual(modifiedJson, twoBoundedContextsAndAnOrphan);
+  });
+  it('merges two simple bounded context with a shared kernel', () => {
+    const modifiedJson = buildActualJsonForSidebarfromManifest(
+      TWO_BOUNDED_CONTEXTS_AND_A_SHARED_KERNEL_MANIFEST,
+    );
+
+    assert.deepStrictEqual(modifiedJson, twoBoundedContextsAndASharedKernel);
   });
 });

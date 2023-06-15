@@ -1,0 +1,48 @@
+[
+  {
+    "children": [
+      {
+        "children": [],
+        "classes": "aggregate",
+        "id": "io.candydoc.ddd.sample.bounded_context_one.feature_A.AggregateOne",
+        "name": "AggregateOne"
+      }
+    ],
+    "classes": "boundedContext",
+    "id": "Bounded context one",
+    "name": "Bounded context one"
+  },
+  {
+    "children": [
+      {
+        "children": [],
+        "classes": "aggregate",
+        "id": "io.candydoc.ddd.sample.bounded_context_two.feature_A.AggregateTwo",
+        "name": "AggregateTwo"
+      }
+    ],
+    "classes": "boundedContext",
+    "id": "Bounded context two",
+    "name": "Bounded context two"
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [],
+            "classes": "valueObject",
+            "id": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_B.SharedValueObjectTwo",
+            "name": "SharedValueObjectTwo"
+          }
+        ],
+        "classes": "valueObject",
+        "id": "io.candydoc.ddd.sample.one_valid_shared_kernel.shared_A.SharedValueObjectOne",
+        "name": "SharedValueObjectOne"
+      }
+    ],
+    "classes": "sharedKernel",
+    "id": "Shared kernel one",
+    "name": "Shared kernel one"
+  }
+]

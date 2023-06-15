@@ -33,6 +33,12 @@ export class CytoscapeNode {
     this._parents.push(parentId);
   }
 
+  public getStrategicPattern() {
+    if (this._parents.length > 0) {
+      return this._parents[0];
+    }
+  }
+
   public addError(errorCode: string) {
     this._errors.push(errorCode);
   }
