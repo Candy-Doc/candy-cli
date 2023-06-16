@@ -1,0 +1,71 @@
+[
+  {
+    "data": {
+      "id": "Bounded context two",
+      "label": "Bounded context two"
+    },
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "Bounded context two"
+    },
+    "classes": "aggregate"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
+      "label": "DomainCommandOne",
+      "parent": "Bounded context two"
+    },
+    "classes": "command"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "label": "DomainEventOne",
+      "parent": "Bounded context two"
+    },
+    "classes": "event"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+      "label": "EntityOne",
+      "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    },
+    "classes": "entity"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectOne",
+      "label": "ValueObjectOne",
+      "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    },
+    "classes": "valueObject"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.ValueObjectTwo",
+      "label": "ValueObjectTwo",
+      "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne"
+    },
+    "classes": "valueObject"
+  },
+  {
+    "data": {
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne"
+    }
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainCommandOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    }
+  }
+]

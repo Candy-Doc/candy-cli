@@ -1,0 +1,45 @@
+{
+  "type": "BOUNDED_CONTEXT",
+  "name": "Bounded context one",
+  "description": "Describe the bounded context here",
+  "domainModels": {
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne": {
+      "type": "FACTORY",
+      "simpleName": "FactoryOne",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+          "allowed": false
+        },
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+          "allowed": true
+        }
+      ]
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne": {
+      "type": "DOMAIN_EVENT",
+      "simpleName": "DomainEventOne",
+      "description": "",
+      "dependencies": []
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne": {
+      "type": "AGGREGATE",
+      "simpleName": "AggregateOne",
+      "description": "",
+      "dependencies": []
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne": {
+      "type": "DOMAIN_ENTITY",
+      "simpleName": "EntityOne",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+          "allowed": false
+        }
+      ]
+    }
+  }
+}

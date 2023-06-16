@@ -1,0 +1,28 @@
+{
+  "type": "BOUNDED_CONTEXT",
+  "name": "Bounded context one",
+  "description": "Describe the bounded context here",
+  "domainModels": {
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne": {
+      "type": "AGGREGATE",
+      "simpleName": "AggregateOne",
+      "description": "",
+      "dependencies": [
+        {
+          "refersTo": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.WrongName",
+          "allowed": true
+        },
+        {
+          "refersTo": "nonExistingNode",
+          "allowed": true
+        }
+      ]
+    },
+    "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne": {
+      "type": "DOMAIN_ENTITY",
+      "simpleName": "EntityOne",
+      "description": "",
+      "dependencies": []
+    }
+  }
+}

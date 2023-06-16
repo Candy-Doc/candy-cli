@@ -1,0 +1,70 @@
+[
+  {
+    "data": {
+      "id": "Bounded context one",
+      "label": "Bounded context one"
+    },
+    "classes": "boundedContext"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
+      "label": "FactoryOne",
+      "parent": "Bounded context one",
+      "errors": [
+        "Not allowed dependency with event"
+      ]
+    },
+    "classes": "factory"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "label": "DomainEventOne",
+      "parent": "Bounded context one",
+      "errors": [
+        "Not allowed dependency with factory"
+      ]
+    },
+    "classes": "event"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne",
+      "label": "AggregateOne",
+      "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+      "errors": [
+        "Not allowed dependency with entity"
+      ]
+    },
+    "classes": "aggregate"
+  },
+  {
+    "data": {
+      "id": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
+      "label": "EntityOne",
+      "parent": "Bounded context one",
+      "errors": [
+        "Not allowed dependency with aggregate"
+      ]
+    },
+    "classes": "entity"
+  },
+  {
+    "data": {
+      "id": 1,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
+      "errors": [
+        "Not allowed dependency between factory and event"
+      ]
+    }
+  },
+  {
+    "data": {
+      "id": 2,
+      "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
+      "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.AggregateOne"
+    }
+  }
+]

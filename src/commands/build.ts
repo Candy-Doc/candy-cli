@@ -1,12 +1,14 @@
 import { Command, Option } from 'clipanion';
 import * as t from 'typanion';
 import cli from '../services/cli';
-import { copy } from 'fs-extra';
+import { outputFile } from 'fs-extra';
 import { createDownloadStream } from '../tools/download';
 import { getPackageLatestVersionUrl } from '../tools/npm';
 import { createUnTarStream } from '../tools/archive';
 import { pipeline } from 'stream/promises';
 import path from 'path';
+import { CytoscapeAdapter } from '../tools/adapter/CytoscapeAdapter';
+import fs from 'fs';
 
 class Build extends Command {
   static paths = [[`build`], [`b`], Command.Default];
@@ -25,13 +27,13 @@ class Build extends Command {
   extractDir = Option.String('-e,--extract-dir', {
     validator: t.isString(),
     arity: 1,
-    description: 'Where the builded project should be placed',
+    description: 'Where the built project should be placed',
   });
 
   buildName = Option.String('-b,--build-name', {
     validator: t.isString(),
     arity: 1,
-    description: 'Name of the folder containing the builded project',
+    description: 'Name of the folder containing the built project',
   });
 
   async execute() {
@@ -39,7 +41,9 @@ class Build extends Command {
     this.buildName = this.buildName ? this.buildName : 'candy-build';
     const finalDir = path.join(this.extractDir, this.buildName);
     try {
-      await copy(this.JSONpath, `${finalDir}/candy-data.json`);
+      const jsonFile = JSON.parse(fs.readFileSync(this.JSONpath, 'utf-8'));
+      const jsonForCytoscape = new CytoscapeAdapter().adapt(jsonFile);
+      await outputFile(`${finalDir}/candy-data.json`, jsonForCytoscape);
       const packageLatestVersionUrl = await getPackageLatestVersionUrl('@candy-doc/board');
       const downloadStream = createDownloadStream(packageLatestVersionUrl);
       const unTarStream = createUnTarStream(finalDir);
