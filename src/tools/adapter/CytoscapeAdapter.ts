@@ -5,7 +5,7 @@ import { PatternFormatter } from './PatternFormatter';
 import { CytoscapePattern } from './CytoscapePattern';
 import { IAdapter } from './Adapter';
 import { UbiquitousLanguageJson } from '../../model/UbiquitousLanguageJson';
-import { NOT_ALLOWED_DEPENDENCIES } from './ErrorCodes';
+import { NOT_ALLOWED_DEPENDENCIES_BETWEEN, NOT_ALLOWED_DEPENDENCIES_WITH } from './Errors';
 import { CytoscapeNode } from '../../model/CytoscapeNode';
 
 export class CytoscapeAdapter implements IAdapter {
@@ -101,8 +101,8 @@ export class CytoscapeAdapter implements IAdapter {
           const parentNode = this.getNode(domainModelId);
           if (dependencyNode && parentNode) {
             if (!dependencyDto.allowed) {
-              parentNode.addError(NOT_ALLOWED_DEPENDENCIES);
-              dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES);
+              parentNode.addError(NOT_ALLOWED_DEPENDENCIES_WITH(dependencyNode.classes));
+              dependencyNode.addError(NOT_ALLOWED_DEPENDENCIES_WITH(parentNode.classes));
             }
             if (this.isNodeDependency(parentNode.classes, dependencyNode.classes)) {
               dependencyNode.addParent(parentNode.id);
@@ -112,7 +112,14 @@ export class CytoscapeAdapter implements IAdapter {
                   id: this.newEdgeId(),
                   source: domainModelId,
                   target: dependencyDto.refersTo,
-                  errors: dependencyDto.allowed ? undefined : [NOT_ALLOWED_DEPENDENCIES],
+                  errors: dependencyDto.allowed
+                    ? undefined
+                    : [
+                        NOT_ALLOWED_DEPENDENCIES_BETWEEN(
+                          parentNode.classes,
+                          dependencyNode.classes,
+                        ),
+                      ],
                 },
               };
               this.edges.push(domainModelEdge);

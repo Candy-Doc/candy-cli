@@ -12,7 +12,7 @@
       "label": "FactoryOne",
       "parent": "Bounded context one",
       "errors": [
-        "!DEP"
+        "Not allowed dependency with event"
       ]
     },
     "classes": "factory"
@@ -23,7 +23,7 @@
       "label": "DomainEventOne",
       "parent": "Bounded context one",
       "errors": [
-        "!DEP"
+        "Not allowed dependency with factory"
       ]
     },
     "classes": "event"
@@ -34,7 +34,7 @@
       "label": "AggregateOne",
       "parent": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.EntityOne",
       "errors": [
-        "!DEP"
+        "Not allowed dependency with entity"
       ]
     },
     "classes": "aggregate"
@@ -45,7 +45,7 @@
       "label": "EntityOne",
       "parent": "Bounded context one",
       "errors": [
-        "!DEP"
+        "Not allowed dependency with aggregate"
       ]
     },
     "classes": "entity"
@@ -56,7 +56,7 @@
       "source": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.FactoryOne",
       "target": "io.candydoc.ddd.sample.one_valid_bounded_context.feature_A.DomainEventOne",
       "errors": [
-        "!DEP"
+        "Not allowed dependency between factory and event"
       ]
     }
   },
